@@ -1,3 +1,4 @@
+#coding:utf8
 """
 This is the boilerplate default configuration file.
 Changes and additions to settings should be done in the config module
@@ -17,7 +18,7 @@ config = {
                            'environment_args': {'extensions': ['jinja2.ext.i18n']}},
 
 # application name
-'app_name' : "Google App Engine Boilerplate",
+'app_name' : "Epigrass Web",
 
 # the default language code for the application.
 # should match whatever language the site uses when i18n is disabled
@@ -92,7 +93,7 @@ config = {
 
 # fellas' list
 'developers' : (
-    ('Santa Klauss', 'snowypal@northpole.com'),
+    ('Flávio Coelho', 'fccoelho@gmail.com'),
 ),
 
 # ----> ADD MORE CONFIGURATION OPTIONS HERE <----

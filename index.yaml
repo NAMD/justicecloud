@@ -10,6 +10,12 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Simulation
+  properties:
+  - name: name
+  - name: date_uploaded
+    direction: desc
+
 - kind: User
   properties:
   - name: __key__

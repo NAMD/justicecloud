@@ -1007,6 +1007,57 @@ class ContactHandler(BaseHandler):
     def form(self):
         return forms.ContactForm(self)
 
+class LibraryHandler(BaseHandler):
+    '''
+    Handler for simulation library
+    '''
+    def get(self):
+        """
+        Returns a list of available simulations
+        """
+        q = models.Simulation.query().order(models.Simulation.name,-models.Simulation.date_uploaded)
+        params = {
+            'sims': q.fetch()
+        }
+
+        return self.render_template('simulations.html',**params)
+
+
+class SimulationHandler(BaseHandler):
+    '''
+    Handler for simulation viewing
+    '''
+    def get(self):
+        """
+        Returns a simulation object
+        """
+        q = models.Simulation.query().order(models.Simulation.name,-models.Simulation.date_uploaded)
+        params = {
+            'sims': q.fetch()
+        }
+
+        return self.render_template('simpanel.html',**params)
+
+class UploadHandler(BaseHandler):
+    """
+    Hander for simulation uploading
+    """
+    @user_required
+    def get(self):
+        if self.user:
+            pass
+        params = {
+            'form': self.form()
+        }
+        return self.render_template('upload.html', **params)
+    @user_required
+    def post(self):
+        self.redirect_to('simulations')
+
+    @webapp2.cached_property
+    def form(self):
+        return forms.SimulationForm(self)
+
 
 class EditProfileHandler(BaseHandler):
     """

@@ -1,0 +1,42 @@
+{% extends base_layout %}
+
+{% block title %}
+{% trans %}Simulations Library{% endtrans %} - {{app_name}}
+{% endblock %}
+{% block header_title_lead %}
+{% endblock %}
+{% block content %}
+    <p class="lead">
+    {%trans%}Simulations{%endtrans%}
+    </p>
+    <p>
+        {%trans%}These are simulations uploaded by our users.{%endtrans%}
+    </p>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">{%trans%}Manage{%endtrans%}</a>
+            <ul class="nav">
+                <li {% if path == uri_for("carga") %}class="active" {% endif %}><a href="{{ uri_for("carga") }}">{%trans%}Upload{%endtrans%}</a></li>
+                <li><a href="#">Link</a></li>
+                <li>    <form class="navbar-search pull-left">
+                    <input type="text" class="search-query" placeholder="Search">
+                </form></li>
+            </ul>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr><th>{%trans%}Name{%endtrans%}</th><th>{%trans%}uploaded on{%endtrans%}</th><th>{%trans%}Description{%endtrans%}</th><th>{%trans%}Owner{%endtrans%}</th></tr>
+        </thead>
+        <tbody>
+        {%for s in sims%}
+            <tr>
+            <td>s.name</td><td>s.date_uploaded</td><td>s.description</td><td>s.owner</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        …
+    </table>
+{% endblock %}
+
+

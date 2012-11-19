@@ -1,0 +1,24 @@
+{% extends base_layout %}
+
+{% block title %}
+    {% trans %}Contact{% endtrans %} - {{app_name}}
+{% endblock %}
+{% block header_title %}
+    {% trans %}Contact{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="/simulations/upload/" class="well form-horizontal">
+        <div>{{ form.name.label }}: {{ form.name(class="input-xlarge focused required") }}</div>
+        {% if form.name.errors %}
+            <ul class="errors">{% for error in form.name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+        {% endif %}
+
+        <div>{{ form.description.label }}: {{ form.description() }}</div>
+        {% if form.password.errors %}
+            <ul class="errors">{% for error in form.description.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+        {% endif %}
+    </form>
+{% endblock %}
+
+

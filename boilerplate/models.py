@@ -148,3 +148,21 @@ class SocialUser(ndb.Model):
     @staticmethod
     def open_id_providers():
         return [k for k,v in SocialUser.PROVIDERS_INFO.items() if v['uri']]
+
+class Simulation(ndb.Model):
+    owner = ndb.KeyProperty(kind=User)
+    date_uploaded = ndb.DateProperty(auto_now_add=True)
+    name = ndb.StringProperty()
+    description = ndb.TextProperty(compressed=True)
+    map = ndb.JsonProperty() # map in GeoJson Format
+    series = ndb.JsonProperty(compressed=True)
+    epg = ndb.JsonProperty()
+    model = ndb.TextProperty()
+
+    @classmethod
+    def get_by_owner(cls, owner):
+        return cls.query(cls.owner == owner).fetch()
+
+    @classmethod
+    def get_by_owner_and_name(cls, owner, name):
+        return cls.query(cls.owner == owner, cls.name == name).get()

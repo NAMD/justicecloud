@@ -1,11 +1,11 @@
-application: sandengine
-version: 2-2
+application: epigrass-hrd
+version: 2
 runtime: python27
 api_version: 1
 threadsafe: true
 
 # In production, uncomment line below.
-default_expiration: "30d"
+#default_expiration: "30d"
 
 skip_files:
 - ^(.*/)?#.*#

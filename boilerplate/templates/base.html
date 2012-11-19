@@ -9,9 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{% block title %}{{ app_name }}{% endblock %}</title>
     <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="keywords" content="">
-    <meta name="generator" content="Google App Engine Boilerplate 2.2.0-beta rev516 (g9b1f961)">
+    <meta name="author" content="Flávio C. Coelho">
+    <meta name="keywords" content="Epidemics math models">
+    <meta name="generator" content="Epigrass Web (alpha)">
 
     <!-- Mobile viewport optimized: h5bp.com/viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,7 +60,7 @@
                 <a class="brand" href="/">{{ app_name }}</a>
                 <div class="nav-collapse">
                     <ul class="nav pull-right">
-                        <li><a href="https://github.com/coto/gae-boilerplate" target="_blank"><span class="icon-inbox" ></span> {% trans %}Source Code{% endtrans %}</a></li>
+                        <li><a href="https://github.com/fccoelho/epigrassgae" target="_blank"><span class="icon-inbox" ></span> {% trans %}Source Code{% endtrans %}</a></li>
                         {% if locale_iso %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -133,16 +133,15 @@
                 {% block header_title_lead %}
                 <h1>{% block header_title %}{{ app_name }}{% endblock %}</h1>
                 <p class="lead">
-		            {% trans %}Congratulations on your Google App Engine Boilerplate powered page.{% endtrans %}
-		            <br><a href="http://github.com/coto/gae-boilerplate/blob/master/README.rdoc" target="_blank">
-		            {% trans %}Learn why this Boilerplate Rocks{% endtrans %}</a> {% trans %}or just{% endtrans %} 
-		            <a href="http://github.com/coto/gae-boilerplate/" target="_blank">{% trans %}download the Source Code{% endtrans %}</a> 
-		            {% trans %}to help you to create your application.{% endtrans %}
-				</p>
+                    {% trans %}Welcome to Epigrass Web.{% endtrans %}
+                    <br><a href="http://github.com/coto/gae-boilerplate/blob/master/README.rdoc" target="_blank">
+                    {% trans %}Learn how to use Epigrass Web{% endtrans %}</a>
+                </p>
                 {% endblock %}
                 {% block subnavbar %}
                 <div class="subnav">
                     <ul>
+                        <li{% if path == uri_for("simulations") %} class="active"{% endif %}><a href="{{ uri_for("simulations") }}">{% trans %}Browse Models{% endtrans %}</a></li>
                         <li{% if path == uri_for("contact") %} class="active"{% endif %}><a href="{{ uri_for("contact") }}">{% trans %}Contact{% endtrans %}</a></li>
                         {% if not user_id %}
                         <li{% if path == uri_for("register") %} class="active"{% endif %}><a href="{{ uri_for("register") }}">{% trans %}Sign Up{% endtrans %}</a></li>
@@ -166,7 +165,7 @@
 
             {% block footer %}
             <footer>
-                {% trans %}Google App Engine Boilerplate is released under the{% endtrans %} <a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">LGPL</a>
+                {% trans %}Epigrass Web is released under the{% endtrans %} <a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">LGPL</a>
             </footer>
             {% endblock %}
         </div><!-- /content -->
