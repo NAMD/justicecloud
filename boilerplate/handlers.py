@@ -1033,7 +1033,7 @@ class SimulationHandler(BaseHandler):
         """
         q = models.Simulation.query().order(models.Simulation.name,-models.Simulation.date_uploaded)
         params = {
-            'sims': q.fetch()
+            'sims': q.fetch(),
         }
 
         return self.render_template('simpanel.html',**params)
@@ -1047,11 +1047,22 @@ class UploadHandler(BaseHandler):
         if self.user:
             pass
         params = {
-            'form': self.form()
+            'form': self.form
         }
         return self.render_template('upload.html', **params)
-    @user_required
+
     def post(self):
+        if not self.form.validate():
+            return self.get()
+        sim  = models.Simulation()
+        sim.owner = self.user_id
+        sim.name = self.form.name.data
+        sim.description = self.form.description.data
+        sim.map = self.form.map.data
+        sim.epg = self.form.epg.data
+        sim.model = self.form.model.data
+        sim.put()
+
         self.redirect_to('simulations')
 
     @webapp2.cached_property
