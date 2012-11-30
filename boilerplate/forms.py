@@ -97,7 +97,7 @@ class EditPasswordMobileForm(PasswordMixin, CurrentPasswordMixin):
 class EditEmailForm(PasswordMixin):
     new_email = fields.TextField(_('Email'), [validators.Required(), validators.Length(min=7, max=FIELD_MAXLENGTH), validators.regexp(utils.EMAIL_REGEXP, message=_('Invalid email address.'))])
 
-def validate_json(field):
+def validate_json(form,field):
     fname = field.data.lower()
     ALLOWED_EXTENSIONS = ['json','js']
     if not ('.' in fname and fname.rsplit('.',1)[1] in ALLOWED_EXTENSIONS):
@@ -109,6 +109,6 @@ class SimulationForm(BaseForm):
     map = fields.FileField(_('Map Layer'),[validators.Optional(), validate_json])
     series = fields.FileField(_('Time Series'),[validators.Required(), validate_json])
     epg = fields.FileField(_('Epg file'),[validators.Required(), validate_json])
-    model = fields.TextAreaField(_('Model Source'),[validators.Required(), validators.Length(min=10,max=10000)])
+    model = fields.TextAreaField(_('Model Source'),[validators.Length(min=10,max=10000)])
 
 

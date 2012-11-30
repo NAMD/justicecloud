@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <form method="POST" action="{{ url|safe }}" class="well form-horizontal">
+    <form method="POST" action="{{ url|safe }}" enctype="multipart/form-data" class="well form-horizontal">
         <fieldset>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <div>{{ form.name.label }}: {{ form.name(class="input-xlarge focused required") }}</div>

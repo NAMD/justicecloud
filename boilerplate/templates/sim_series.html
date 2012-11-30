@@ -1,0 +1,88 @@
+{% extends base_layout %}
+
+{% block title %}
+    {% trans %}Simulations View{% endtrans %} - {{app_name}}
+{% endblock %}
+{% block header_title_lead %}
+{% endblock %}
+{% block content %}
+    <p class="lead">
+        {{ name }}
+    </p>
+    <p>
+        {%trans%}Navigate the results using the bar below{%endtrans%}
+    </p>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="{{ uri_for("sim-view",simulation_id=id) }}">{%trans%}Results{%endtrans%}</a>
+            <ul class="nav">
+                <li {% if path == uri_for("sim-map",simulation_id=id) %}class="active" {% endif %}><a href="{{ uri_for("sim-map",simulation_id=id) }}">{%trans%}Map{%endtrans%}</a></li>
+                <li {% if path == uri_for("sim-series",simulation_id=id) %}class="active" {% endif %}><a href="{{ uri_for("sim-series",simulation_id=id) }}">{%trans%}Series{%endtrans%}</a></li>
+                <li {% if path == uri_for("sim-net",simulation_id=id) %}class="active" {% endif %}><a href="{{ uri_for("sim-net",simulation_id=id) }}">{%trans%}Network{%endtrans%}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="series" style="width:100%;"></div>
+    <script src="/js/dygraph-combined.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/colorbrewer/colorbrewer.css">
+    <style>
+    .plot .dygraph-legend > span {display: none;}
+    .plot .dygraph-legend > span.highlight {display: inline;}
+    </style>
+    <script type="text/javascript">
+        var data = {{ data|safe }}
+        var seriesdiv = document.getElementById("series")
+        var makeClickCallback = function(graph) {
+            var isLocked = false;
+            return function(ev) {
+                if (isLocked) {
+                    graph.clearSelection();
+                    isLocked = false;
+                } else {
+                    graph.setSelection(graph.getSelection(), graph.getHighlightSeries(), true);
+                    isLocked = true;
+                }
+            };
+        };
+        function draw() {
+                    var variables = {{ variables|safe }};
+                    var localities = {{ localities|safe}};
+                    var nplots = {{ nplots }};
+                    for (i=0; i<nplots ; i++){
+                        var div = document.createElement('div');
+                        div.style.margin = '20px';
+                        div.className = "plot";
+                        seriesdiv.appendChild(div);
+                        g = new Dygraph(
+                                div,
+                                data[variables[i]],
+                                {
+                                    width: '80%',
+                                    height: 320,
+                                   // customBars: true,
+                                    title: variables[i] + {% trans %}'Time Series',{% endtrans %}
+                                    ylabel: variables[i],
+                                    xlabel: {% trans %}'time'{% endtrans %},
+                                   // legend: 'always',
+                                    labels: localities,
+                                    labelsDivStyles: { 'textAlign': 'center' },
+                                    showRangeSelector: true,
+                                    highlightCircleSize: 2,
+                                    strokeWidth: 1,
+                                   // strokeBorderWidth: isStacked ? null : 1,
+                                    highlightSeriesOpts: {
+                                        strokeWidth: 3,
+                                        strokeBorderWidth: 1,
+                                        highlightCircleSize: 5,},
+                                }
+                        );
+                        g.updateOptions({clickCallback: makeClickCallback(g)}, true);
+                        g.setSelection(false, 's005');
+                    }
+                }
+        draw();
+    </script>
+
+{% endblock %}
+

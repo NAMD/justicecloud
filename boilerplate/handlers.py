@@ -12,6 +12,8 @@
 import logging
 import re
 import json
+import cgi
+from os import environ
 
 # related third party imports
 import webapp2
@@ -1016,8 +1018,9 @@ class LibraryHandler(BaseHandler):
         Returns a list of available simulations
         """
         q = models.Simulation.query().order(models.Simulation.name,-models.Simulation.date_uploaded)
+        sims = q.fetch()
         params = {
-            'sims': q.fetch()
+            'sims': sims,
         }
 
         return self.render_template('simulations.html',**params)
@@ -1027,16 +1030,55 @@ class SimulationHandler(BaseHandler):
     '''
     Handler for simulation viewing
     '''
-    def get(self):
+    def get(self,simulation_id):
         """
         Returns a simulation object
         """
-        q = models.Simulation.query().order(models.Simulation.name,-models.Simulation.date_uploaded)
+        s = models.Simulation.get_by_id(int(simulation_id))
         params = {
-            'sims': q.fetch(),
-        }
+            'simulation': s,
+            }
 
-        return self.render_template('simpanel.html',**params)
+        return self.render_template('sim_view.html',**params)
+
+class SimulationMapHandler(BaseHandler):
+    """
+    Returns map view of a simulation object
+    """
+    def get(self,simulation_id):
+        s = models.Simulation.get_by_id(int(simulation_id))
+#        print s.map
+        params = {
+            'simulation': s,
+            }
+
+        return self.render_template('sim_map_ll.html',**params)
+
+class SimulationSeriesHandler(BaseHandler):
+    def get(self,simulation_id):
+        sim = models.Simulation.get_by_id(int(simulation_id))
+        series = json.loads(sim.series)
+        labels = ['x'] + series.keys() #localities
+        labels = [str(s) for s in labels] #removing unicode objects
+        vars = series.values()[0].keys() #variables
+        vars = [str(v) for v in vars]
+        n = len(series[labels[1]][vars[0]])
+        data = {}
+        for v in vars:
+            arr = [range(n)] + [series[l][v] for l in labels[1:]]
+            data[v] = [list(t) for t in zip(*arr)]
+#            print data[v]
+        params = {
+            'name':sim.name,
+            'id': simulation_id,
+            'localities': labels,
+            'variables': vars,
+            'data': data,
+            'nplots':len(vars),
+            }
+        return self.render_template('sim_series.html',**params)
+class SimulationNetHandler(BaseHandler):
+    pass
 
 class UploadHandler(BaseHandler):
     """
@@ -1052,14 +1094,26 @@ class UploadHandler(BaseHandler):
         return self.render_template('upload.html', **params)
 
     def post(self):
-        if not self.form.validate():
-            return self.get()
+#        if not self.form.validate():
+#            return self.get()
+        map = self.request.POST.multi['map'].file.read()
+        series = self.request.POST.multi['series'].file.read()
+        epg = self.request.POST.multi['epg'].file.read()
+        print type (map), map
+
+
+        user_info = models.User.get_by_id(long(self.user_id))
         sim  = models.Simulation()
-        sim.owner = self.user_id
+        sim.owner = user_info.key
         sim.name = self.form.name.data
         sim.description = self.form.description.data
-        sim.map = self.form.map.data
-        sim.epg = self.form.epg.data
+#        sim.put()
+        sim.map = map
+#        sim.put()
+        sim.epg = epg
+#        sim.put()
+        sim.series = series
+#        sim.put()
         sim.model = self.form.model.data
         sim.put()
 

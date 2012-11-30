@@ -31,7 +31,7 @@
         <tbody>
         {%for s in sims%}
             <tr>
-            <td>s.name</td><td>s.date_uploaded</td><td>s.description</td><td>s.owner</td>
+            <td><a href="{{ uri_for('sim-view',simulation_id=s.key.id()) }}">{{ s.name }}</a></td><td>{{ s.date_uploaded }}</td><td>{{ s.description }}</td><td>{{ s.owner }}</td>
             </tr>
         {% endfor %}
         </tbody>

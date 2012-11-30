@@ -153,10 +153,10 @@ class Simulation(ndb.Model):
     owner = ndb.KeyProperty(kind=User)
     date_uploaded = ndb.DateProperty(auto_now_add=True)
     name = ndb.StringProperty()
-    description = ndb.TextProperty(compressed=True)
-    map = ndb.JsonProperty() # map in GeoJson Format
+    description = ndb.TextProperty()
+    map = ndb.JsonProperty(compressed=True) # map in GeoJson Format
     series = ndb.JsonProperty(compressed=True)
-    epg = ndb.JsonProperty()
+    epg = ndb.JsonProperty(compressed=True)
     model = ndb.TextProperty()
 
     @classmethod
