@@ -5,13 +5,44 @@
 {% block content %}
 
     {% if user_id %}
-    <div class="hero-unit home_bp">
+    <div class="hero-unit">
+        <div id="myCarousel" class="carousel slide">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+                <div class="active item">
+                    <img width="800px" height="600px" src="/img/screenshot1.jpg"></img>
+                    <div class="carousel-caption">
+                        <h4>{% trans %}Map View{% endtrans %}</h4>
+                        <p>{% trans %}Navigate the simulation results on the map.{% endtrans %}</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img width="800px" height="600px" src="/img/screenshot2.jpg"></img>
+                    <div class="carousel-caption">
+                        <h4>{% trans %}Series view{% endtrans %}</h4>
+                        <p>{% trans %}Inspect time series of the simulation{% endtrans %}</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img width="800px" height="600px" src="/img/screenshot3.png"></img>
+                    <div class="carousel-caption">
+                        <h4>{% trans %}Detail view{% endtrans %}</h4>
+                        <p>{% trans %}View the specifications of the simulation.{% endtrans %}</p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Carousel nav -->
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
         <h1>
             Epigrass Web
         </h1>
         <p>
             {% trans %}Welcome to our web interface.{% endtrans %}
-            <br><a href="http://github.com/coto/gae-boilerplate/blob/master/README.md" target="_blank">
+            <br><a href="http://epigrass.net/documentation/" target="_blank">
             {% trans %}Learn how to use it{% endtrans %}</a>
         </p>
     </div>
@@ -24,7 +55,7 @@
                 </h1>
                 <p>
                     {% trans %}Welcome to our web interface.{% endtrans %}
-                    <br><a href="http://github.com/coto/gae-boilerplate/blob/master/README.md" target="_blank">
+                    <br><a href="http://epigrass.net/documentation/" target="_blank">
                     {% trans %}Learn how to use it{% endtrans %}</a>
                 </p>
             </div>

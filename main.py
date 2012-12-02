@@ -23,13 +23,13 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'epigrass/external'))
 import webapp2
 
 import routes
-from epigrass import routes as boilerplate_routes
+from epigrass import routes as epigrass_routes
 from admin import routes as admin_routes
-from epigrass import config as boilerplate_config
+from epigrass import config as epigrass_config
 import config
 from epigrass.lib.basehandler import handle_error
 
-webapp2_config = boilerplate_config.config
+webapp2_config = epigrass_config.config
 webapp2_config.update(config.config)
 
 app = webapp2.WSGIApplication(debug = os.environ['SERVER_SOFTWARE'].startswith('Dev'), config=webapp2_config)
@@ -38,7 +38,7 @@ for status_int in app.config['error_templates']:
     app.error_handlers[status_int] = handle_error
 
 routes.add_routes(app)
-boilerplate_routes.add_routes(app)
+epigrass_routes.add_routes(app)
 admin_routes.add_routes(app)
 
 

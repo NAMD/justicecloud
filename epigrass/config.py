@@ -9,7 +9,7 @@ config = {
 'environment': "testing",
 
 # webapp2 sessions
-'webapp2_extras.sessions' : {'secret_key': '_PUT_KEY_HERE_YOUR_SECRET_KEY_'},
+'webapp2_extras.sessions' : {'secret_key': '_minha_chave_secreta_'},
 
 # webapp2 authentication
 'webapp2_extras.auth' : {'user_model': 'epigrass.models.User',

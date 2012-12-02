@@ -53,8 +53,8 @@
 
         #network .link {
             stroke: #999;
-            stroke-opacity: .6;
-            stroke-width: 1.5px;
+            stroke-opacity: .5;
+            stroke-width: 1.0px;
         }
         .axis path, .axis line {
             fill: none;
@@ -75,8 +75,8 @@
                     .radius(120);
 
             var force = d3.layout.force()
-                    .charge(-240)
-                    .linkDistance(40)
+                    .charge(-440)
+                    .linkDistance(60)
                     .size([width, height]);
 
             var svg = d3.select("#network").append("svg")

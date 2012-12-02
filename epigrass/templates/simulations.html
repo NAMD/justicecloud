@@ -26,12 +26,12 @@
     </div>
     <table class="table table-striped">
         <thead>
-        <tr><th>{%trans%}Name{%endtrans%}</th><th>{%trans%}uploaded on{%endtrans%}</th><th>{%trans%}Description{%endtrans%}</th><th>{%trans%}Owner{%endtrans%}</th></tr>
+        <tr><th>{%trans%}Name{%endtrans%}</th><th>{%trans%}uploaded on{%endtrans%}</th><th>{%trans%}Description{%endtrans%}</th><th>{%trans%}Owner{%endtrans%}</th><th></th></tr>
         </thead>
         <tbody>
-        {%for s in sims%}
+        {%for s in sims %}
             <tr>
-            <td><a href="{{ uri_for('sim-view',simulation_id=s.key.id()) }}">{{ s.name }}</a></td><td>{{ s.date_uploaded }}</td><td>{{ s.description }}</td><td>{{ s.owner }}</td>
+            <td><a href="{{ uri_for('sim-view',simulation_id=s.key.id()) }}">{{ s.name }}</a></td><td>{{ s.date_uploaded }}</td><td>{{ s.description }}</td><td>{{ s.owner.get().name }}</td>{% if user_id|int == s.owner.id() %}<td><i class="icon-trash" rel="tooltip" title="Delete simulation"></i></td>{% endif %}
             </tr>
         {% endfor %}
         </tbody>
