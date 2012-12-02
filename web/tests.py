@@ -20,16 +20,16 @@ from google.appengine.ext import testbed
 from mock import Mock
 from mock import patch
 
-import boilerplate
-from boilerplate import models
-from boilerplate import config as boilerplate_config
+import epigrass
+from epigrass import models
+from epigrass import config as boilerplate_config
 import config
-from boilerplate import routes
-from boilerplate import routes as boilerplate_routes
-from boilerplate.lib import utils
-from boilerplate.lib import captcha
-from boilerplate.lib import i18n
-from boilerplate.lib import test_helpers
+from epigrass import routes
+from epigrass import routes as boilerplate_routes
+from epigrass.lib import utils
+from epigrass.lib import captcha
+from epigrass.lib import i18n
+from epigrass.lib import test_helpers
 
 # setting HTTP_HOST in extra_environ parameter for TestApp is not enough for taskqueue stub
 os.environ['HTTP_HOST'] = 'localhost'
@@ -54,7 +54,7 @@ class AppTest(unittest.TestCase, test_helpers.HandlerHelpers):
         self.testapp = webtest.TestApp(self.app, extra_environ={'REMOTE_ADDR' : '127.0.0.1'})
         
         # use absolute path for templates
-        self.app.config['webapp2_extras.jinja2']['template_path'] =  [os.path.join(os.path.dirname(boilerplate.__file__), '../templates'), os.path.join(os.path.dirname(boilerplate.__file__), 'templates')]
+        self.app.config['webapp2_extras.jinja2']['template_path'] =  [os.path.join(os.path.dirname(epigrass.__file__), '../templates'), os.path.join(os.path.dirname(epigrass.__file__), 'templates')]
 
         # activate GAE stubs
         self.testbed = testbed.Testbed()
@@ -71,7 +71,7 @@ class AppTest(unittest.TestCase, test_helpers.HandlerHelpers):
         self.headers = {'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) Version/6.0 Safari/536.25',
                         'Accept-Language' : 'en_US'}
 
-        # fix configuration if this is still a raw boilerplate code - required by test with mails
+        # fix configuration if this is still a raw epigrass code - required by test with mails
         if not utils.is_email_valid(self.app.config.get('contact_sender')):
             self.app.config['contact_sender'] = "noreply-testapp@example.com"
         if not utils.is_email_valid(self.app.config.get('contact_recipient')):

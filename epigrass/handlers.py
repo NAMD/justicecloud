@@ -35,6 +35,19 @@ from lib.basehandler import BaseHandler
 from lib.basehandler import user_required
 from lib import facebook
 
+def convert(input):
+    """
+    function to decode json unicode so that it is compatible with javascript
+    """
+    if isinstance(input, dict):
+        return {convert(key): convert(value) for key, value in input.iteritems()}
+    elif isinstance(input, list):
+        return [convert(element) for element in input]
+    elif isinstance(input, unicode):
+        return input.encode('utf-8')
+    else:
+        return input
+
 
 class LoginRequiredHandler(BaseHandler):
     def get(self):
@@ -1030,16 +1043,60 @@ class SimulationHandler(BaseHandler):
     '''
     Handler for simulation viewing
     '''
+
     def get(self,simulation_id):
         """
         Returns a simulation object
         """
         s = models.Simulation.get_by_id(int(simulation_id))
+        if self.user:
+            user_info = models.User.get_by_id(long(self.user_id))
+            self.form.name.data = s.name
+            self.form.description.data = s.description
+            self.form.model.data = s.model
+
+        epg = s.epg.decode('unicode-escape').splitlines()
         params = {
             'simulation': s,
+            'epg': epg,
+            'form': self.form
             }
 
         return self.render_template('sim_view.html',**params)
+
+    def post(self):
+    #        if not self.form.validate():
+    #            return self.get()
+        map = self.request.POST.multi['map'].file.read()
+        series = self.request.POST.multi['series'].file.read()
+        epg = self.request.POST.multi['epg'].file.read()
+        network = self.request.POST.multi['network'].file.read()
+        spread = self.request.POST.multi['spread'].file.read()
+        print type (map), map
+
+
+        user_info = models.User.get_by_id(long(self.user_id))
+        sim  = models.Simulation()
+        sim.owner = user_info.key
+        sim.name = self.form.name.data
+        sim.description = self.form.description.data
+        #        sim.put()
+        sim.map = map
+        #        sim.put()
+        sim.epg = epg
+        #        sim.put()
+        sim.series = series
+        #        sim.put()
+        sim.network = network
+        sim.spread = spread
+        sim.model = self.form.model.data
+        sim.put()
+
+        self.redirect_to('simulations')
+
+    @webapp2.cached_property
+    def form(self):
+        return forms.SimulationForm(self)
 
 class SimulationMapHandler(BaseHandler):
     """
@@ -1057,11 +1114,11 @@ class SimulationMapHandler(BaseHandler):
 class SimulationSeriesHandler(BaseHandler):
     def get(self,simulation_id):
         sim = models.Simulation.get_by_id(int(simulation_id))
-        series = json.loads(sim.series)
+        series = json.loads(sim.series,object_hook=convert)
         labels = ['x'] + series.keys() #localities
-        labels = [str(s) for s in labels] #removing unicode objects
+#        labels = [str(s) for s in labels] #removing unicode objects
         vars = series.values()[0].keys() #variables
-        vars = [str(v) for v in vars]
+#        vars = [str(v) for v in vars]
         n = len(series[labels[1]][vars[0]])
         data = {}
         for v in vars:
@@ -1078,7 +1135,19 @@ class SimulationSeriesHandler(BaseHandler):
             }
         return self.render_template('sim_series.html',**params)
 class SimulationNetHandler(BaseHandler):
-    pass
+    def get(self,simulation_id):
+        sim = models.Simulation.get_by_id(int(simulation_id))
+        network = json.loads(sim.network, object_hook=convert)
+
+        data = {}
+
+        params = {
+            'name':sim.name,
+            'id': simulation_id,
+            'network':json.dumps(network),
+
+            }
+        return self.render_template('sim_network.html',**params)
 
 class UploadHandler(BaseHandler):
     """
@@ -1099,6 +1168,8 @@ class UploadHandler(BaseHandler):
         map = self.request.POST.multi['map'].file.read()
         series = self.request.POST.multi['series'].file.read()
         epg = self.request.POST.multi['epg'].file.read()
+        network = self.request.POST.multi['network'].file.read()
+        spread = self.request.POST.multi['spread'].file.read()
         print type (map), map
 
 
@@ -1114,6 +1185,8 @@ class UploadHandler(BaseHandler):
 #        sim.put()
         sim.series = series
 #        sim.put()
+        sim.network = network
+        sim.spread = spread
         sim.model = self.form.model.data
         sim.put()
 

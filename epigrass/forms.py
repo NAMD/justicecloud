@@ -109,6 +109,8 @@ class SimulationForm(BaseForm):
     map = fields.FileField(_('Map Layer'),[validators.Optional(), validate_json])
     series = fields.FileField(_('Time Series'),[validators.Required(), validate_json])
     epg = fields.FileField(_('Epg file'),[validators.Required(), validate_json])
+    network = fields.FileField(_('Network file'),[validators.Optional()])
+    spread = fields.FileField(_('Spread tree file'),[validators.Optional()])
     model = fields.TextAreaField(_('Model Source'),[validators.Length(min=10,max=10000)])
 
 

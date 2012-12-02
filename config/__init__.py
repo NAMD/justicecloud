@@ -2,7 +2,7 @@ import os
 
 """
 This configuration file loads environment's specific config settings for the application.
-It takes precedence over the config located in the boilerplate package.
+It takes precedence over the config located in the epigrass package.
 """
 
 if "SERVER_SOFTWARE" in os.environ:

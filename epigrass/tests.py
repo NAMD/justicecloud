@@ -20,15 +20,15 @@ from google.appengine.ext import testbed
 from mock import Mock
 from mock import patch
 
-import boilerplate
-from boilerplate import models
-from boilerplate import routes
-from boilerplate import routes as boilerplate_routes
-from boilerplate import config as boilerplate_config
-from boilerplate.lib import utils
-from boilerplate.lib import captcha
-from boilerplate.lib import i18n
-from boilerplate.lib import test_helpers
+import epigrass
+from epigrass import models
+from epigrass import routes
+from epigrass import routes as boilerplate_routes
+from epigrass import config as boilerplate_config
+from epigrass.lib import utils
+from epigrass.lib import captcha
+from epigrass.lib import i18n
+from epigrass.lib import test_helpers
 
 # setting HTTP_HOST in extra_environ parameter for TestApp is not enough for taskqueue stub
 os.environ['HTTP_HOST'] = 'localhost'
@@ -67,7 +67,7 @@ class AppTest(unittest.TestCase, test_helpers.HandlerHelpers):
         self.headers = {'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) Version/6.0 Safari/536.25',
                         'Accept-Language' : 'en_US'}
 
-        # fix configuration if this is still a raw boilerplate code - required by test with mails
+        # fix configuration if this is still a raw epigrass code - required by test with mails
         if not utils.is_email_valid(self.app.config.get('contact_sender')):
             self.app.config['contact_sender'] = "noreply-testapp@example.com"
         if not utils.is_email_valid(self.app.config.get('contact_recipient')):
@@ -298,9 +298,9 @@ class AppTest(unittest.TestCase, test_helpers.HandlerHelpers):
         form = self.get_form('/password-reset/', 'form_reset_password',
                              expect_fields=['email_or_username', 'recaptcha_challenge_field', 'recaptcha_response_field'])
         form['email_or_username'] = 'testuser'
-        with patch('boilerplate.lib.captcha.submit', return_value=captcha.RecaptchaResponse(is_valid=False)):
+        with patch('epigrass.lib.captcha.submit', return_value=captcha.RecaptchaResponse(is_valid=False)):
             self.submit(form, expect_error=True, error_message='Wrong image verification code.')
-        with patch('boilerplate.lib.captcha.submit', return_value=captcha.RecaptchaResponse(is_valid=True)):
+        with patch('epigrass.lib.captcha.submit', return_value=captcha.RecaptchaResponse(is_valid=True)):
             response1 = self.submit(form, warning_message="you will receive an e-mail from us with instructions for resetting your password.")
             form['email_or_username'] = 'user_does_not_exists'
             response2 = self.submit(form, warning_message="you will receive an e-mail from us with instructions for resetting your password.")

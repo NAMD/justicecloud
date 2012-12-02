@@ -13,8 +13,8 @@ from webapp2_extras import auth
 from webapp2_extras import sessions
 from google.appengine.api import taskqueue
 # local application/library specific imports
-from boilerplate import models
-from boilerplate.lib import utils, i18n
+from epigrass import models
+from epigrass.lib import utils, i18n
 from babel import Locale
 
 def user_required(handler):

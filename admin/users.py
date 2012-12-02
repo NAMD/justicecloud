@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import webapp2
-from boilerplate import models
-from boilerplate import forms
-from boilerplate.handlers import BaseHandler
+from epigrass import models
+from epigrass import forms
+from epigrass.handlers import BaseHandler
 from google.appengine.datastore.datastore_query import Cursor
 from google.appengine.ext import ndb
 from google.appengine.api import users

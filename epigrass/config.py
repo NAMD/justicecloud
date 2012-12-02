@@ -1,6 +1,6 @@
 #coding:utf8
 """
-This is the boilerplate default configuration file.
+This is the epigrass default configuration file.
 Changes and additions to settings should be done in the config module
 located in the application root rather than this config.
 """
@@ -12,11 +12,11 @@ config = {
 'webapp2_extras.sessions' : {'secret_key': '_PUT_KEY_HERE_YOUR_SECRET_KEY_'},
 
 # webapp2 authentication
-'webapp2_extras.auth' : {'user_model': 'boilerplate.models.User',
+'webapp2_extras.auth' : {'user_model': 'epigrass.models.User',
                          'cookie_name': 'session_name'},
 
 # jinja2 templates
-'webapp2_extras.jinja2' : {'template_path': ['templates','boilerplate/templates', 'admin/templates'],
+'webapp2_extras.jinja2' : {'template_path': ['templates','epigrass/templates', 'admin/templates'],
                            'environment_args': {'extensions': ['jinja2.ext.i18n']}},
 
 # application name

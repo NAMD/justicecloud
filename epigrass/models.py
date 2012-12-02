@@ -150,13 +150,15 @@ class SocialUser(ndb.Model):
         return [k for k,v in SocialUser.PROVIDERS_INFO.items() if v['uri']]
 
 class Simulation(ndb.Model):
-    owner = ndb.KeyProperty(kind=User)
+    owner = ndb.KeyProperty(kind=User,required=True)
     date_uploaded = ndb.DateProperty(auto_now_add=True)
-    name = ndb.StringProperty()
+    name = ndb.StringProperty(required=True)
     description = ndb.TextProperty()
     map = ndb.JsonProperty(compressed=True) # map in GeoJson Format
-    series = ndb.JsonProperty(compressed=True)
-    epg = ndb.JsonProperty(compressed=True)
+    series = ndb.JsonProperty(compressed=True,required=True)
+    epg = ndb.TextProperty(compressed=True,required=True)
+    network = ndb.JsonProperty(compressed=True)
+    spread = ndb.JsonProperty(compressed=True)
     model = ndb.TextProperty()
 
     @classmethod

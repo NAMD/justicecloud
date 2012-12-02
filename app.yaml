@@ -48,17 +48,17 @@ handlers:
   static_files: static/\1
   upload: static/(robots\.txt|humans\.txt|crossdomain\.xml)
 
-- url: /boilerplate/css
+- url: /epigrass/css
   mime_type: text/css
-  static_dir: boilerplate/static/css
+  static_dir: epigrass/static/css
 
-- url: /boilerplate/js
+- url: /epigrass/js
   mime_type: text/javascript
-  static_dir: boilerplate/static/js
+  static_dir: epigrass/static/js
 
-- url: /boilerplate/img/(.*\.(gif|png|jpg))
-  static_files: boilerplate/static/img/\1
-  upload: boilerplate/static/img/(.*\.(gif|png|jpg))
+- url: /epigrass/img/(.*\.(gif|png|jpg))
+  static_files: epigrass/static/img/\1
+  upload: epigrass/static/img/(.*\.(gif|png|jpg))
 
 - url: /css
   mime_type: text/css
@@ -89,10 +89,10 @@ libraries:
 error_handlers:
   # Only errors with error_code, don't put a default error here
   - error_code: over_quota
-    file: boilerplate/templates/errors/over_quota.html
+    file: epigrass/templates/errors/over_quota.html
 
   - error_code: dos_api_denial
-    file: boilerplate/templates/errors/dos_api_denial.html
+    file: epigrass/templates/errors/dos_api_denial.html
 
   - error_code: timeout
-    file: boilerplate/templates/errors/timeout.html
+    file: epigrass/templates/errors/timeout.html

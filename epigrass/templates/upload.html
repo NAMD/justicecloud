@@ -34,6 +34,14 @@
             {% if form.epg.errors %}
                 <ul class="errors">{% for error in form.epg.errors %}<li>{{ error }}</li>{% endfor %}</ul>
             {% endif %}
+            <div>{{ form.network.label }}: {{ form.network(class="input-xlarge focused required") }}</div>
+            {% if form.network.errors %}
+                <ul class="errors">{% for error in form.network.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+            <div>{{ form.spread.label }}: {{ form.spread(class="input-xlarge focused required") }}</div>
+            {% if form.spread.errors %}
+                <ul class="errors">{% for error in form.spread.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
             <div>{{ form.model.label }}: {{ form.model(class="input-xlarge focused") }}</div>
             {% if form.model.errors %}
                 <ul class="errors">{% for error in form.model.errors %}<li>{{ error }}</li>{% endfor %}</ul>

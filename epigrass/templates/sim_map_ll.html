@@ -31,7 +31,8 @@
     <div id="map_div" class="well">
 
     </div>
-
+    <script src="/js/d3.v2.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/colorbrewer/colorbrewer.css">
     <style>
         #map_div {
             width: 100%;
@@ -94,16 +95,10 @@
 
 
         // get color depending on population density value
-        function getColor(d) {
-            return d > .7 ? '#800026' :
-                    d > .6  ? '#BD0026' :
-                            d > .5  ? '#E31A1C' :
-                                    d > .4  ? '#FC4E2A' :
-                                            d > .30   ? '#FD8D3C' :
-                                                    d > .20   ? '#FEB24C' :
-                                                            d > .1   ? '#FED976' :
-                                                                    '#FFEDA0';
-        }
+
+        var color = d3.scale.linear()
+                .domain([0,1])
+                .range(["yellow","orange","red"])
 
         function style(feature) {
             return {
@@ -112,7 +107,7 @@
                 color: 'white',
                 dashArray: '3',
                 fillOpacity: 0.7,
-                fillColor: getColor(parseFloat(feature.properties.prevalence))
+                fillColor: color(parseFloat(feature.properties.prevalence))
             };
         }
 
