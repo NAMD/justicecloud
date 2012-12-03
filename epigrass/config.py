@@ -6,7 +6,7 @@ located in the application root rather than this config.
 """
 config = {
 
-'environment': "testing",
+'environment': "production",
 
 # webapp2 sessions
 'webapp2_extras.sessions' : {'secret_key': '_minha_chave_secreta_'},
