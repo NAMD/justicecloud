@@ -1064,7 +1064,7 @@ class SimulationHandler(BaseHandler):
 
         return self.render_template('sim_view.html',**params)
 
-    def post(self):
+    def post(self,simulation_id):
     #        if not self.form.validate():
     #            return self.get()
         map = self.request.POST.multi['map'].file.read()
@@ -1076,19 +1076,22 @@ class SimulationHandler(BaseHandler):
 
 
         user_info = models.User.get_by_id(long(self.user_id))
-        sim  = models.Simulation()
+        sim  = models.Simulation.get_by_id(int(simulation_id))
         sim.owner = user_info.key
         sim.name = self.form.name.data
         sim.description = self.form.description.data
         #        sim.put()
-        sim.map = map
+        if map:
+            sim.map = map
+        if epg:
+            sim.epg = epg
         #        sim.put()
-        sim.epg = epg
-        #        sim.put()
-        sim.series = series
-        #        sim.put()
-        sim.network = network
-        sim.spread = spread
+        if series:
+            sim.series = series
+        if network:
+            sim.network = network
+        if spread:
+            sim.spread = spread
         sim.model = self.form.model.data
         sim.put()
 
