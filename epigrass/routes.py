@@ -26,6 +26,7 @@ _routes = [
     RedirectRoute('/simulations/view/<simulation_id>/map/',handlers.SimulationMapHandler, name='sim-map', strict_slash=True),
     RedirectRoute('/simulations/view/<simulation_id>/series/',handlers.SimulationSeriesHandler, name='sim-series', strict_slash=True),
     RedirectRoute('/simulations/view/<simulation_id>/network/',handlers.SimulationNetHandler, name='sim-net', strict_slash=True),
+    RedirectRoute('/simulations/view/<simulation_id>/spread/',handlers.SimulationSpreadHandler, name='sim-spread', strict_slash=True),
     RedirectRoute('/simulations/upload/',handlers.UploadHandler, name='carga', strict_slash=True),
     RedirectRoute('/settings/profile', handlers.EditProfileHandler, name='edit-profile', strict_slash=True),
     RedirectRoute('/settings/password', handlers.EditPasswordHandler, name='edit-password', strict_slash=True),

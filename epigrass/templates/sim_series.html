@@ -19,6 +19,7 @@
                 <li {% if path == uri_for("sim-map",simulation_id=id) %}class="active" {% endif %}><a href="{{ uri_for("sim-map",simulation_id=id) }}">{%trans%}Map{%endtrans%}</a></li>
                 <li {% if path == uri_for("sim-series",simulation_id=id) %}class="active" {% endif %}><a href="{{ uri_for("sim-series",simulation_id=id) }}">{%trans%}Series{%endtrans%}</a></li>
                 <li {% if path == uri_for("sim-net",simulation_id=id) %}class="active" {% endif %}><a href="{{ uri_for("sim-net",simulation_id=id) }}">{%trans%}Network{%endtrans%}</a></li>
+                <li {% if path == uri_for("sim-spread",simulation_id=id) %}class="active" {% endif %}><a href="{{ uri_for("sim-spread",simulation_id=id) }}">{%trans%}Spread Tree{%endtrans%}</a></li>
             </ul>
         </div>
     </div>

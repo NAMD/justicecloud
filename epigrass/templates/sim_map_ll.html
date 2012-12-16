@@ -13,18 +13,19 @@
 
     <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
     <p class="lead">
-        {{ simulation.name }}
+        {{ name }}
     </p>
     <p>
         {%trans%}Navigate the results using the bar below{%endtrans%}
     </p>
     <div class="navbar">
         <div class="navbar-inner">
-            <a class="brand" href="{{ uri_for("sim-view",simulation_id=simulation.key.id()) }}">{%trans%}Results{%endtrans%}</a>
+            <a class="brand" href="{{ uri_for("sim-view",simulation_id=sid) }}">{%trans%}Results{%endtrans%}</a>
             <ul class="nav">
-                <li {% if path == uri_for("sim-map",simulation_id=simulation.key.id()) %}class="active" {% endif %}><a href="{{ uri_for("sim-map",simulation_id=simulation.key.id()) }}">{%trans%}Map{%endtrans%}</a></li>
-                <li {% if path == uri_for("sim-series",simulation_id=simulation.key.id()) %}class="active" {% endif %}><a href="{{ uri_for("sim-series",simulation_id=simulation.key.id()) }}">{%trans%}Series{%endtrans%}</a></li>
-                <li {% if path == uri_for("sim-net",simulation_id=simulation.key.id()) %}class="active" {% endif %}><a href="{{ uri_for("sim-net",simulation_id=simulation.key.id()) }}">{%trans%}Network{%endtrans%}</a></li>
+                <li {% if path == uri_for("sim-map",simulation_id=sid) %}class="active" {% endif %}><a href="{{ uri_for("sim-map",simulation_id=sid) }}">{%trans%}Map{%endtrans%}</a></li>
+                <li {% if path == uri_for("sim-series",simulation_id=sid) %}class="active" {% endif %}><a href="{{ uri_for("sim-series",simulation_id=sid) }}">{%trans%}Series{%endtrans%}</a></li>
+                <li {% if path == uri_for("sim-net",simulation_id=sid) %}class="active" {% endif %}><a href="{{ uri_for("sim-net",simulation_id=sid) }}">{%trans%}Network{%endtrans%}</a></li>
+                <li {% if path == uri_for("sim-spread",simulation_id=sid) %}class="active" {% endif %}><a href="{{ uri_for("sim-spread",simulation_id=sid) }}">{%trans%}Spread Tree{%endtrans%}</a></li>
             </ul>
         </div>
     </div>
@@ -128,7 +129,7 @@
             info.update(layer.feature.properties);
         }
 
-        var jsonData = {{ simulation.map | safe }};
+        var jsonData = {{ map | safe }};
 
         var geojson;
 

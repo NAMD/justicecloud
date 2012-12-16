@@ -24,6 +24,7 @@ from webapp2_extras.i18n import gettext as _
 from webapp2_extras.appengine.auth.models import Unique
 from google.appengine.api import taskqueue
 from google.appengine.api import users
+from google.appengine.api import memcache
 from github import github
 from linkedin import linkedin
 
@@ -1048,7 +1049,11 @@ class SimulationHandler(BaseHandler):
         """
         Returns a simulation object
         """
-        s = models.Simulation.get_by_id(int(simulation_id))
+        s = memcache.get('simulation_%s'%simulation_id)
+        if s is None:
+            s = models.Simulation.get_by_id(int(simulation_id))
+            memcache.add('simulation_%s'%simulation_id, s,60)
+
         if self.user:
             user_info = models.User.get_by_id(long(self.user_id))
             self.form.name.data = s.name
@@ -1057,22 +1062,39 @@ class SimulationHandler(BaseHandler):
 
         epg = s.epg.decode('unicode-escape').splitlines()
         params = {
-            'simulation': s,
+#            'simulation': s,
+            'sid': simulation_id,
+            'name': s.name,
             'epg': epg,
+            'model': s.model,
             'form': self.form
             }
 
         return self.render_template('sim_view.html',**params)
 
     def post(self,simulation_id):
-    #        if not self.form.validate():
-    #            return self.get()
-        map = self.request.POST.multi['map'].file.read()
-        series = self.request.POST.multi['series'].file.read()
-        epg = self.request.POST.multi['epg'].file.read()
-        network = self.request.POST.multi['network'].file.read()
-        spread = self.request.POST.multi['spread'].file.read()
-        print type (map), map
+#        if not self.form.validate():
+#            return self.get(simulation_id)
+        try:
+            map = self.request.POST.multi['map'].file.read()
+        except AttributeError:
+            map = False
+        try:
+            series = self.request.POST.multi['series'].file.read()
+        except AttributeError:
+            series = False
+        try:
+            epg = self.request.POST.multi['epg'].file.read()
+        except AttributeError:
+            epg = False
+        try:
+            network = self.request.POST.multi['network'].file.read()
+        except AttributeError:
+            network = False
+        try:
+            spread = self.request.POST.multi['spread'].file.read()
+        except AttributeError:
+            spread = False
 
 
         user_info = models.User.get_by_id(long(self.user_id))
@@ -1106,17 +1128,45 @@ class SimulationMapHandler(BaseHandler):
     Returns map view of a simulation object
     """
     def get(self,simulation_id):
-        s = models.Simulation.get_by_id(int(simulation_id))
+        s = memcache.get('simulation_%s'%simulation_id)
+        if s is None:
+            s = models.Simulation.get_by_id(int(simulation_id))
+            memcache.add('simulation_%s'%simulation_id, s,60)
 #        print s.map
         params = {
-            'simulation': s,
+#            'simulation': s,
+            'map':  s.map,
+            'sid':  simulation_id,
+            'name': s.name,
             }
 
         return self.render_template('sim_map_ll.html',**params)
 
+class SimulationSpreadHandler(BaseHandler):
+    """
+    Returns Spread tree view of a simulation object
+    """
+    def get(self,simulation_id):
+        s = memcache.get('simulation_%s'%simulation_id)
+        if s is None:
+            s = models.Simulation.get_by_id(int(simulation_id))
+            memcache.add('simulation_%s'%simulation_id, s,60)
+        #        print s.map
+        params = {
+            #            'simulation': s,
+            'map':  s.map,
+            'sid':  simulation_id,
+            'name': s.name,
+            }
+
+        return self.render_template('sim_spread.html',**params)
+
 class SimulationSeriesHandler(BaseHandler):
     def get(self,simulation_id):
-        sim = models.Simulation.get_by_id(int(simulation_id))
+        sim = memcache.get('simulation_%s'%simulation_id)
+        if sim is None:
+            sim = models.Simulation.get_by_id(int(simulation_id))
+            memcache.add('simulation_%s'%simulation_id, sim,60)
         series = json.loads(sim.series,object_hook=convert)
         labels = ['x'] + series.keys() #localities
 #        labels = [str(s) for s in labels] #removing unicode objects
@@ -1137,9 +1187,13 @@ class SimulationSeriesHandler(BaseHandler):
             'nplots':len(vars),
             }
         return self.render_template('sim_series.html',**params)
+
 class SimulationNetHandler(BaseHandler):
     def get(self,simulation_id):
-        sim = models.Simulation.get_by_id(int(simulation_id))
+        sim = memcache.get('simulation_%s'%simulation_id)
+        if sim is None:
+            sim = models.Simulation.get_by_id(int(simulation_id))
+            memcache.add('simulation_%s'%simulation_id, sim,60)
         network = json.loads(sim.network, object_hook=convert)
 
         data = {}
@@ -1151,6 +1205,25 @@ class SimulationNetHandler(BaseHandler):
 
             }
         return self.render_template('sim_network.html',**params)
+
+class SimulationSpreadHandler(BaseHandler):
+    """
+    Returns Spread tree view of a simulation object
+    """
+    def get(self,simulation_id):
+        s = memcache.get('simulation_%s'%simulation_id)
+        if s is None:
+            s = models.Simulation.get_by_id(int(simulation_id))
+            memcache.add('simulation_%s'%simulation_id, s,60)
+            #        print s.map
+        params = {
+            #            'simulation': s,
+            'spread':  s.spread,
+            'sid':  simulation_id,
+            'name': s.name,
+            }
+
+        return self.render_template('sim_spread.html',**params)
 
 class UploadHandler(BaseHandler):
     """
@@ -1166,8 +1239,8 @@ class UploadHandler(BaseHandler):
         return self.render_template('upload.html', **params)
 
     def post(self):
-#        if not self.form.validate():
-#            return self.get()
+        if not self.form.validate():
+            return self.get()
         map = self.request.POST.multi['map'].file.read()
         series = self.request.POST.multi['series'].file.read()
         epg = self.request.POST.multi['epg'].file.read()
