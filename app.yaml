@@ -26,15 +26,22 @@ builtins:
 - appstats: on #/_ah/stats/
 - remote_api: on #/_ah/remote_api/
 
+inbound_services:
+- warmup
+
 handlers:
 - url: /admin/.*
   script: main.app
   login: admin
 
+- url: /simulations/.*
+  script: main.app
+  login: required
+
 - url: /favicon\.ico
   mime_type: image/png
   static_files: static/egicon.png
-  upload: static/egicon.ico
+  upload: static/egicon.png
 
 - url: /apple-touch-icon\.png
   static_files: static/apple-touch-icon.png

@@ -155,8 +155,8 @@ class Simulation(ndb.Model):
     name = ndb.StringProperty(required=True)
     description = ndb.TextProperty()
     map = ndb.JsonProperty(compressed=True) # map in GeoJson Format
-    series = ndb.JsonProperty(compressed=True,required=True)
-    epg = ndb.TextProperty(compressed=True,required=True)
+    series = ndb.JsonProperty(compressed=True)
+    epg = ndb.TextProperty(compressed=True)
     network = ndb.JsonProperty(compressed=True)
     spread = ndb.JsonProperty(compressed=True)
     model = ndb.TextProperty()

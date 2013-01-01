@@ -97,18 +97,18 @@ class EditPasswordMobileForm(PasswordMixin, CurrentPasswordMixin):
 class EditEmailForm(PasswordMixin):
     new_email = fields.TextField(_('Email'), [validators.Required(), validators.Length(min=7, max=FIELD_MAXLENGTH), validators.regexp(utils.EMAIL_REGEXP, message=_('Invalid email address.'))])
 
-def validate_json(form,field):
-    fname = field.data.lower()
-    ALLOWED_EXTENSIONS = ['json','js']
-    if not ('.' in fname and fname.rsplit('.',1)[1] in ALLOWED_EXTENSIONS):
-        raise ValidationError('You must upload a JSON file.')
+#def validate_json(form,field):
+#    fname = field.data.lower()
+#    ALLOWED_EXTENSIONS = ['json','js']
+#    if not ('.' in fname and fname.rsplit('.',1)[1] in ALLOWED_EXTENSIONS):
+#        raise ValidationError('You must upload a JSON file.')
 
 class SimulationForm(BaseForm):
     name = fields.StringField(_('Name'),[validators.Required(), validators.Length(min=3, max=FIELD_MAXLENGTH), validators.regexp(utils.ALPHANUMERIC_REGEXP, message=_('Invalid name.'))])
     description = fields.TextAreaField(_('Description'),[validators.Optional(), validators.Length(min=10,max=512)])
-    map = fields.FileField(_('Map Layer'),[validators.Optional(), validate_json])
-    series = fields.FileField(_('Time Series'),[validators.Required(), validate_json])
-    epg = fields.FileField(_('Epg file'),[validators.Required(), validate_json])
+    map = fields.FileField(_('Map Layer'),[validators.Optional()])
+    series = fields.FileField(_('Time Series'),[validators.Optional()])
+    epg = fields.FileField(_('Epg file'),[validators.Optional()])
     network = fields.FileField(_('Network file'),[validators.Optional()])
     spread = fields.FileField(_('Spread tree file'),[validators.Optional()])
     model = fields.TextAreaField(_('Model Source'),[validators.Length(min=10,max=10000)])

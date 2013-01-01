@@ -22,6 +22,7 @@ _routes = [
     RedirectRoute('/resend/<user_id>/<token>', handlers.ResendActivationEmailHandler, name='resend-account-activation', strict_slash=True),
     RedirectRoute('/contact/', handlers.ContactHandler, name='contact', strict_slash=True),
     RedirectRoute('/simulations/',handlers.LibraryHandler, name='simulations', strict_slash=True),
+    RedirectRoute('/simulations/delete/<simulation_id>/',handlers.SimulationDelete, name='sim-del', strict_slash=True),
     RedirectRoute('/simulations/view/<simulation_id>/',handlers.SimulationHandler, name='sim-view', strict_slash=True),
     RedirectRoute('/simulations/view/<simulation_id>/map/',handlers.SimulationMapHandler, name='sim-map', strict_slash=True),
     RedirectRoute('/simulations/view/<simulation_id>/series/',handlers.SimulationSeriesHandler, name='sim-series', strict_slash=True),

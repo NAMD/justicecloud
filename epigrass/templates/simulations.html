@@ -16,8 +16,7 @@
         <div class="navbar-inner">
             <a class="brand" href="#">{%trans%}Manage{%endtrans%}</a>
             <ul class="nav">
-                <li {% if path == uri_for("carga") %}class="active" {% endif %}><a href="{{ uri_for("carga") }}">{%trans%}Upload{%endtrans%}</a></li>
-                <li><a href="#">Link</a></li>
+                <li {% if path == "/simulations/view/new/" %}class="active" {% endif %}><a href="/simulations/view/new/">{% trans %}New Simulation{% endtrans %}</a></li>
                 <li>    <form class="navbar-search pull-left">
                     <input type="text" class="search-query" placeholder="Search">
                 </form></li>
@@ -31,12 +30,21 @@
         <tbody>
         {%for s in sims %}
             <tr>
-            <td><a href="{{ uri_for('sim-view',simulation_id=s.key.id()) }}">{{ s.name }}</a></td><td>{{ s.date_uploaded }}</td><td>{{ s.description }}</td><td>{{ s.owner.get().name }}</td>{% if user_id|int == s.owner.id() %}<td><i class="icon-trash" rel="tooltip" title="Delete simulation"></i></td>{% endif %}
+            <td><a href="{{ uri_for('sim-view',simulation_id=s.key.id()) }}">{{ s.name }}</a></td><td>{{ s.date_uploaded }}</td><td>{{ s.description }}</td><td>{{ s.owner.get().name }}</td>{% if user_id|int == s.owner.id() %}<td><i class="icon-trash" rel="tooltip" title="Delete simulation" onclick="delete_simulation({{ s.key.id() }})"></i></td>{% endif %}
             </tr>
         {% endfor %}
         </tbody>
         …
     </table>
+    <script type="text/javascript">
+        function delete_simulation(id){
+            $.ajax({
+                url: '/simulations/delete/'+id,
+                type: 'GET',
+                success: function (result){}
+            });
+        }
+    </script>
 {% endblock %}
 
 

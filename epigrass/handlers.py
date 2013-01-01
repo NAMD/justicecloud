@@ -1049,32 +1049,47 @@ class SimulationHandler(BaseHandler):
         """
         Returns a simulation object
         """
-        s = memcache.get('simulation_%s'%simulation_id)
-        if s is None:
-            s = models.Simulation.get_by_id(int(simulation_id))
-            memcache.add('simulation_%s'%simulation_id, s,60)
+        user_info = models.User.get_by_id(long(self.user_id))
+        if simulation_id == "new": # Create a new Simulation entry
+            sim = models.Simulation(name=_("New Model"))
+            sim.owner = user_info.key
+            sim.put()
+            simulation_id = sim.key.id()
+        else:
+#            sim = memcache.get('simulation_%s'%simulation_id)
+#            if sim is None:
+            sim = models.Simulation.get_by_id(int(simulation_id))
+            memcache.add('simulation_%s'%simulation_id, sim,60)
 
         if self.user:
             user_info = models.User.get_by_id(long(self.user_id))
-            self.form.name.data = s.name
-            self.form.description.data = s.description
-            self.form.model.data = s.model
-
-        epg = s.epg.decode('unicode-escape').splitlines()
+            self.form.name.data = sim.name
+            self.form.description.data = sim.description
+            self.form.model.data = sim.model
+        if sim.epg is not None:
+            epg = sim.epg.decode('unicode-escape').splitlines()
+        else:
+            epg = []
         params = {
 #            'simulation': s,
             'sid': simulation_id,
-            'name': s.name,
+            'name': sim.name,
             'epg': epg,
-            'model': s.model,
+            'model': sim.model,
             'form': self.form
             }
 
         return self.render_template('sim_view.html',**params)
 
     def post(self,simulation_id):
+        """
+        Handle updates of the simulation record
+        """
 #        if not self.form.validate():
 #            return self.get(simulation_id)
+        user_info = models.User.get_by_id(long(self.user_id))
+        sim  = models.Simulation.get_by_id(int(simulation_id))
+
         try:
             map = self.request.POST.multi['map'].file.read()
         except AttributeError:
@@ -1096,12 +1111,11 @@ class SimulationHandler(BaseHandler):
         except AttributeError:
             spread = False
 
-
-        user_info = models.User.get_by_id(long(self.user_id))
-        sim  = models.Simulation.get_by_id(int(simulation_id))
-        sim.owner = user_info.key
-        sim.name = self.form.name.data
-        sim.description = self.form.description.data
+#        sim.owner = user_info.key
+        if self.form.name.data:
+            sim.name = self.form.name.data
+        if self.form.description.data:
+            sim.description = self.form.description.data
         #        sim.put()
         if map:
             sim.map = map
@@ -1114,14 +1128,26 @@ class SimulationHandler(BaseHandler):
             sim.network = network
         if spread:
             sim.spread = spread
-        sim.model = self.form.model.data
+        if self.form.model.data:
+            sim.model = self.form.model.data
         sim.put()
 
-        self.redirect_to('simulations')
+        self.redirect_to('sim-view',simulation_id=simulation_id)
 
     @webapp2.cached_property
     def form(self):
         return forms.SimulationForm(self)
+
+class SimulationDelete(BaseHandler):
+    """
+    handles the deletion of simulations
+    """
+    def get(self,simulation_id):
+        user_info = models.User.get_by_id(long(self.user_id))
+        sim = models.Simulation.get_by_id(int(simulation_id))
+        if sim.owner == user_info.key:
+            sim.key.delete()
+        self.redirect_to('simulations')
 
 class SimulationMapHandler(BaseHandler):
     """
@@ -1231,8 +1257,8 @@ class UploadHandler(BaseHandler):
     """
     @user_required
     def get(self):
-        if self.user:
-            pass
+#        if self.user:
+#            pass
         params = {
             'form': self.form
         }
@@ -1246,7 +1272,6 @@ class UploadHandler(BaseHandler):
         epg = self.request.POST.multi['epg'].file.read()
         network = self.request.POST.multi['network'].file.read()
         spread = self.request.POST.multi['spread'].file.read()
-        print type (map), map
 
 
         user_info = models.User.get_by_id(long(self.user_id))
