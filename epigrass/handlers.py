@@ -12,8 +12,7 @@
 import logging
 import re
 import json
-import cgi
-from os import environ
+from google.appengine.ext import ndb
 
 # related third party imports
 import webapp2
@@ -1033,6 +1032,8 @@ class LibraryHandler(BaseHandler):
         """
         q = models.Simulation.query().order(models.Simulation.name,-models.Simulation.date_uploaded)
         sims = q.fetch()
+#        q2 = ndb.gql("select name, description, owner, date_uploades from Simulation")
+#        sims = q2.fetch()
         params = {
             'sims': sims,
         }

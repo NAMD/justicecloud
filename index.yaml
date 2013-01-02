@@ -16,6 +16,13 @@ indexes:
   - name: date_uploaded
     direction: desc
 
+- kind: Simulation
+  properties:
+  - name: name
+  - name: description
+  - name: date_uploaded
+    direction: desc
+
 - kind: User
   properties:
   - name: __key__
