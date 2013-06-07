@@ -8,38 +8,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-06-07 11:31-0300\n"
+"POT-Creation-Date: 2013-06-07 11:33-0300\n"
 "PO-Revision-Date: 2013-06-07 11:31-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt_BR <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"X-Language: pt_BR\n"
+"X-Source-Language: en\n"
 
-#, python-format
-msgid "%s Account Verification"
+msgid ""
+"\n"
+"        In this Sankey diagram, nodes on the right sent infectious cases to "
+"nodes on the left. Hover your with the mouse to see more details.\n"
+"    "
 msgstr ""
 
-#, python-format
-msgid "%s Email Changed Notification"
+msgid " Justića nas Nuvens"
 msgstr ""
 
-#, python-format
-msgid "%s Password Assistance"
+msgid "'Time Series',"
 msgstr ""
 
-#, python-format
-msgid "%s association successfully added."
-msgstr ""
-
-#, python-format
-msgid "%s authentication is not yet implemented."
-msgstr ""
-
-#, python-format
-msgid "%s successfully disassociated."
+msgid "'time'"
 msgstr ""
 
 msgid ""
@@ -51,34 +45,52 @@ msgstr ""
 msgid "Associate account with"
 msgstr ""
 
-msgid "Change password"
+msgid "Big Picture"
 msgstr ""
+
+msgid "Browse Maps"
+msgstr "Explore os Mapas"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Change password"
+msgstr "Mudar Senha"
 
 msgid "Change your email"
-msgstr ""
+msgstr "Troque o seu email"
 
 msgid "Change your password"
-msgstr ""
+msgstr "Troque sua senha"
 
 msgid "Confirm Password"
-msgstr ""
-
-msgid "Congratulations on your Google App Engine Boilerplate powered page."
-msgstr ""
-
-#, python-format
-msgid ""
-"Congratulations, Your account %s has been successfully "
-"activated.<strong>{0:>s}</strong>"
-msgstr ""
+msgstr "Confirme sua Senha"
 
 msgid "Contact"
-msgstr ""
+msgstr "Entre em contato"
 
 msgid "Country"
-msgstr ""
+msgstr "País"
+
+msgid "Create new map"
+msgstr "Criar novo mapa"
+
+msgid "Creator"
+msgstr "Criador"
 
 msgid "Current Password"
+msgstr "Senha Atual"
+
+msgid "Description"
+msgstr "Descricão"
+
+msgid "Detail view"
+msgstr ""
+
+msgid "Don't have an account?"
+msgstr ""
+
+msgid "EPG file"
 msgstr ""
 
 msgid "Edit Profile"
@@ -93,33 +105,41 @@ msgstr ""
 msgid "Enter your"
 msgstr ""
 
-msgid "Error sending the message. Please try again later."
-msgstr ""
-
 msgid "Existing social association"
 msgstr ""
 
-msgid "Federated login is disabled."
+msgid "Explore nossos dados."
+msgstr ""
+
+msgid "Explore our Data"
 msgstr ""
 
 msgid "Forgot your password?"
 msgstr ""
 
-msgid "Google App Engine Boilerplate is released under the"
+msgid "Good Password"
 msgstr ""
 
-msgid "If the e-mail address you entered"
+msgid "Help"
 msgstr ""
 
-msgid "If the username you entered"
+msgid "Insecure Password"
 msgstr ""
 
-msgid ""
-"Incorrect password! Please enter your current password to change your "
-"account settings."
+msgid "Inspect time series of the simulation"
 msgstr ""
 
-msgid "Invalid email address."
+#, fuzzy
+msgid "Justice Cloud"
+msgstr "Justića nas Nuvens"
+
+msgid "Justice Cloud is released under the"
+msgstr "Justića nas nuvens está licenciado sob a"
+
+msgid "Justice from a cloud view prespective."
+msgstr "A Justića sob uma perpectiva mais elevada"
+
+msgid "Justića na Nuvens."
 msgstr ""
 
 msgid "Language"
@@ -128,19 +148,46 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-msgid "Learn why this Boilerplate Rocks"
-msgstr ""
-
 msgid "Login"
 msgstr ""
 
 msgid "Logout"
 msgstr ""
 
+msgid "Manage"
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid "Map Library"
+msgstr ""
+
+msgid "Map View"
+msgstr ""
+
+msgid "Map Visualizations"
+msgstr ""
+
 msgid "Message"
 msgstr ""
 
+msgid "Model"
+msgstr ""
+
 msgid "Name"
+msgstr ""
+
+msgid "Navigate the results using the bar below"
+msgstr ""
+
+msgid "Navigate the simulation results on the map."
+msgstr ""
+
+msgid "Navigate using the bar below"
+msgstr ""
+
+msgid "Network"
 msgstr ""
 
 msgid "New Email"
@@ -149,27 +196,13 @@ msgstr ""
 msgid "New Password"
 msgstr ""
 
-#, python-format
-msgid ""
-"No user authentication information received from %s. Please ensure you "
-"are logging in from an authorized OpenID Provider (OP)."
-msgstr ""
-
 msgid "Or Sign in using:"
 msgstr ""
 
 msgid "Password"
 msgstr ""
 
-msgid "Password changed successfully."
-msgstr ""
-
-msgid "Passwords must match."
-msgstr ""
-
-msgid ""
-"Please check your new email for confirmation. Your email will be updated "
-"after confirmation."
+msgid "Record"
 msgstr ""
 
 msgid "Remember me?"
@@ -181,188 +214,83 @@ msgstr ""
 msgid "Reset password"
 msgstr ""
 
+msgid "Results"
+msgstr ""
+
+msgid "Search User"
+msgstr ""
+
 msgid "Secure Page"
+msgstr ""
+
+msgid "Secure Password"
 msgstr ""
 
 msgid "Send Message"
 msgstr ""
 
+msgid "Series"
+msgstr ""
+
+msgid "Series view"
+msgstr ""
+
+msgid "Short Password"
+msgstr ""
+
 msgid "Sign Up"
 msgstr ""
 
-#, python-format
-msgid "Social account on %s not found for this user."
+msgid "Simulation Details"
 msgstr ""
 
-msgid "Sorry you are not logged in."
+msgid "Simulations View"
 msgstr ""
 
-msgid "Sorry, Some error occurred."
+msgid "Spread Tree"
 msgstr ""
 
-#, python-format
-msgid "Sorry, The email %s is already registered.<strong>{0:>s}</strong>"
+msgid "Statistics"
 msgstr ""
 
-msgid "Sorry, The user is already registered."
+msgid "These are visualizations created by our users."
 msgstr ""
 
-#, python-format
-msgid "Sorry, The username %s is already registered.<strong>{0:>s}</strong>"
-msgstr ""
-
-msgid "Source Code"
-msgstr ""
-
-msgid "Thanks, your settings have been saved."
-msgstr ""
-
-msgid "The URL you tried to use is either incorrect or no longer valid."
-msgstr ""
-
-msgid ""
-"The URL you tried to use is either incorrect or no longer valid. Enter "
-"your details again below to get a new one."
-msgstr ""
-
-#, python-format
-msgid "The account %s is already in use."
-msgstr ""
-
-#, python-format
-msgid "The email %s is already registered."
-msgstr ""
-
-msgid "The two passwords must match."
-msgstr ""
-
-#, python-format
-msgid ""
-"The username %s is already taken. Please choose "
-"another.<strong>{0:>s}</strong>"
-msgstr ""
-
-#, python-format
-msgid ""
-"The verification email has been resent to %s. Please check your email to "
-"activate your account."
-msgstr ""
-
-#, python-format
-msgid "This %s account is already in use."
-msgstr ""
-
-msgid "This Twitter account is already in use."
-msgstr ""
-
-#, python-format
-msgid ""
-"This Twitter account is not associated with any local account. If you "
-"already have a %s Account, you have <a href=\"/login/\">sign in here</a> "
-"or <a href=\"/register/\">create an account</a>."
-msgstr ""
-
-msgid "This authentication method is not yet implemented."
-msgstr ""
-
-msgid "Twitter association added."
-msgstr ""
-
-msgid "Unable to update profile. Please try again later."
-msgstr ""
-
-#, python-format
-msgid "Unexpected error creating the user %s{0:>s}."
+msgid "Um novo ponto de vista sobre a justića no Brasil"
 msgstr ""
 
 msgid "Update Profile"
 msgstr ""
 
-msgid "User is logged out, but there was an error on the redirection."
+msgid "Update!"
+msgstr ""
+
+msgid "Upload a Simulation"
+msgstr ""
+
+msgid "Upload an Epigrass Simulation"
+msgstr ""
+
+msgid "Upload!"
+msgstr ""
+
+msgid "User Details"
 msgstr ""
 
 msgid "Username"
 msgstr ""
 
-msgid "Username invalid. Use only letters and numbers."
-msgstr ""
-
 msgid "Username or Email"
 msgstr ""
 
-#, python-format
-msgid "Welcome %s, you are now logged in.<strong>{0:>s}</strong>"
+msgid "Veja os nosso dados"
 msgstr ""
 
-msgid "Wrong image verification code. Please try again."
-msgstr ""
-
-msgid "You didn't change your email."
-msgstr ""
-
-msgid ""
-"You were successfully registered. Please check your email to activate "
-"your account."
-msgstr ""
-
-msgid ""
-"You've signed out successfully. Warning: Please clear all cookies and "
-"logout of OpenId providers too if you logged in on a public computer."
-msgstr ""
-
-msgid ""
-"Your account has been activated. Please <a href=\"/login/\">sign in</a> "
-"to your account."
-msgstr ""
-
-msgid ""
-"Your account has not yet been activated. Please check your email to "
-"activate it or"
+msgid "View the specifications of the simulation."
 msgstr ""
 
 msgid "Your browser is <em>ancient!</em>"
 msgstr ""
 
-msgid "Your email has been successfully updated."
+msgid "created on"
 msgstr ""
-
-msgid "Your message was sent successfully."
-msgstr ""
-
-#, python-format
-msgid "Your new username is %s<strong>{0:>s}</strong>"
-msgstr ""
-
-msgid ""
-"Your username or password is incorrect. Please try again (make sure your "
-"caps lock is off)"
-msgstr ""
-
-msgid "click here"
-msgstr ""
-
-msgid "contact us"
-msgstr ""
-
-msgid "download the Source Code"
-msgstr ""
-
-msgid "for further assistance."
-msgstr ""
-
-msgid ""
-"is associated with an account in our records, you will receive an e-mail "
-"from us with instructions for resetting your password. <br>If you don't "
-"receive instructions within a minute or two, check your email's spam and "
-"junk filters, or "
-msgstr ""
-
-msgid "or just"
-msgstr ""
-
-msgid "to help you to create your application."
-msgstr ""
-
-msgid "to resend the email."
-msgstr ""
-
