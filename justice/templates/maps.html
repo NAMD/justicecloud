@@ -1,22 +1,22 @@
 {% extends base_layout %}
 
 {% block title %}
-{% trans %}Simulations Library{% endtrans %} - {{app_name}}
+{% trans %}Map Library{% endtrans %} - {{app_name}}
 {% endblock %}
 {% block header_title_lead %}
 {% endblock %}
 {% block content %}
     <p class="lead">
-    {%trans%}Simulations{%endtrans%}
+    {%trans%}Map Visualizations{%endtrans%}
     </p>
     <p>
-        {%trans%}These are simulations uploaded by our users.{%endtrans%}
+        {%trans%}These are visualizations created by our users.{%endtrans%}
     </p>
     <div class="navbar">
         <div class="navbar-inner">
             <a class="brand" href="#">{%trans%}Manage{%endtrans%}</a>
             <ul class="nav">
-                <li {% if path == "/simulations/view/new/" %}class="active" {% endif %}><a href="/simulations/view/new/">{% trans %}New Simulation{% endtrans %}</a></li>
+                <li {% if path == "/simulations/view/new/" %}class="active" {% endif %}><a href="/simulations/view/new/">{% trans %}Create new map{% endtrans %}</a></li>
                 <li>    <form class="navbar-search pull-left">
                     <input type="text" class="search-query" placeholder="Search">
                 </form></li>
@@ -25,7 +25,7 @@
     </div>
     <table class="table table-striped">
         <thead>
-        <tr><th>{%trans%}Name{%endtrans%}</th><th>{%trans%}uploaded on{%endtrans%}</th><th>{%trans%}Description{%endtrans%}</th><th>{%trans%}Owner{%endtrans%}</th><th></th></tr>
+        <tr><th>{%trans%}Name{%endtrans%}</th><th>{%trans%}created on{%endtrans%}</th><th>{%trans%}Description{%endtrans%}</th><th>{%trans%}Creator{%endtrans%}</th><th></th></tr>
         </thead>
         <tbody>
         {%for s in sims %}

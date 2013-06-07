@@ -10,6 +10,12 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Map
+  properties:
+  - name: name
+  - name: date_created
+    direction: desc
+
 - kind: Simulation
   properties:
   - name: name

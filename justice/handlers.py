@@ -1023,30 +1023,31 @@ class ContactHandler(BaseHandler):
         return forms.ContactForm(self)
 
 class LibraryHandler(BaseHandler):
-    '''
+    """
     Handler for simulation library
-    '''
+    """
+
     def get(self):
         """
         Returns a list of available simulations
         """
-        q = models.Simulation.query().order(models.Simulation.name,-models.Simulation.date_uploaded)
+        q = models.Map.query().order(models.Map.name,-models.Map.date_created)
         sims = q.fetch()
-#        q2 = ndb.gql("select name, description, owner, date_uploades from Simulation")
+#        q2 = ndb.gql("select name, description, creator, date_created from Map")
 #        sims = q2.fetch()
         params = {
             'sims': sims,
         }
 
-        return self.render_template('simulations.html',**params)
+        return self.render_template('maps.html',**params)
 
 
 class SimulationHandler(BaseHandler):
-    '''
+    """
     Handler for simulation viewing
-    '''
+    """
 
-    def get(self,simulation_id):
+    def get(self, simulation_id):
         """
         Returns a simulation object
         """

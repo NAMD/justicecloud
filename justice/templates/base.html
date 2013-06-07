@@ -141,7 +141,7 @@
                 {% block subnavbar %}
                 <div class="subnav">
                     <ul>
-                        <li{% if path == uri_for("simulations") %} class="active"{% endif %}><a href="{{ uri_for("simulations") }}">{% trans %}Browse Models{% endtrans %}</a></li>
+                        <li{% if path == uri_for("maps") %} class="active"{% endif %}><a href="{{ uri_for("maps") }}">{% trans %}Browse Maps{% endtrans %}</a></li>
                         <li{% if path == uri_for("contact") %} class="active"{% endif %}><a href="{{ uri_for("contact") }}">{% trans %}Contact{% endtrans %}</a></li>
                         {% if not user_id %}
                         <li{% if path == uri_for("register") %} class="active"{% endif %}><a href="{{ uri_for("register") }}">{% trans %}Sign Up{% endtrans %}</a></li>
