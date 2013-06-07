@@ -113,4 +113,9 @@ class SimulationForm(BaseForm):
     spread = fields.FileField(_('Spread tree file'),[validators.Optional()])
     model = fields.TextAreaField(_('Model Source'),[validators.Length(min=10,max=10000)])
 
+class MapForm(BaseForm):
+    name = fields.StringField(_('Name'),[validators.Required(), validators.Length(min=3, max=FIELD_MAXLENGTH), validators.regexp(utils.ALPHANUMERIC_REGEXP, message=_('Invalid name.'))])
+
+    description = fields.TextAreaField(_('Description'),[validators.Optional(), validators.Length(min=10,max=512)])
+    search_term = fields.StringField(_('Search Expression'))
 

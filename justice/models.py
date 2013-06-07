@@ -154,7 +154,8 @@ class Map(ndb.Model):
     date_created = ndb.DateProperty(auto_now_add=True)
     name = ndb.StringProperty(required=True)
     description = ndb.TextProperty()
-    map = ndb.JsonProperty(compressed=True) # map in GeoJson Format
+    search_term = ndb.StringProperty(required=True)  # Search expression filtering the data.
+    map = ndb.JsonProperty(compressed=True)  # map in GeoJson Format
 
 
     @classmethod

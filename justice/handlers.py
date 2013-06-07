@@ -1024,7 +1024,7 @@ class ContactHandler(BaseHandler):
 
 class LibraryHandler(BaseHandler):
     """
-    Handler for simulation library
+    Handler for map library
     """
 
     def get(self):
@@ -1032,124 +1032,99 @@ class LibraryHandler(BaseHandler):
         Returns a list of available simulations
         """
         q = models.Map.query().order(models.Map.name,-models.Map.date_created)
-        sims = q.fetch()
+        maps = q.fetch()
 #        q2 = ndb.gql("select name, description, creator, date_created from Map")
-#        sims = q2.fetch()
+#        maps = q2.fetch()
         params = {
-            'sims': sims,
+            'maps': maps,
         }
 
         return self.render_template('maps.html',**params)
 
 
-class SimulationHandler(BaseHandler):
+class MapHandler(BaseHandler):
     """
-    Handler for simulation viewing
+    Handler for Map viewing
     """
-
-    def get(self, simulation_id):
+    @user_required
+    def get(self, map_id):
         """
-        Returns a simulation object
+        Returns a map object
         """
         user_info = models.User.get_by_id(long(self.user_id))
-        if simulation_id == "new": # Create a new Simulation entry
-            sim = models.Simulation(name=_("New Model"))
-            sim.owner = user_info.key
-            sim.put()
-            simulation_id = sim.key.id()
+        if map_id == "new":  # Create a new Simulation entry
+            Mapa = models.Map(name=_("New Map"))
+            Mapa.creator = user_info.key
+            Mapa.search_term = ""
+            Mapa.put()
+            map_id = Mapa.key.id()
         else:
-#            sim = memcache.get('simulation_%s'%simulation_id)
-#            if sim is None:
-            sim = models.Simulation.get_by_id(int(simulation_id))
-            memcache.add('simulation_%s'%simulation_id, sim,60)
+#            Map = memcache.get('simulation_%s'%map_id)
+#            if Map is None:
+            Mapa = models.Map.get_by_id(int(map_id))
+            memcache.add('map_%s'%map_id, Mapa,60)
 
         if self.user:
             user_info = models.User.get_by_id(long(self.user_id))
-            self.form.name.data = sim.name
-            self.form.description.data = sim.description
-            self.form.model.data = sim.model
-        if sim.epg is not None:
-            epg = sim.epg.decode('unicode-escape').splitlines()
+            self.form.name.data = Mapa.name
+            self.form.description.data = Mapa.description
+            self.form.search_term.data = Mapa.search_term
+        if Mapa.search_term is not None:
+            search = Mapa.search_term.decode('unicode-escape')
         else:
-            epg = []
+            search = ""
         params = {
 #            'simulation': s,
-            'sid': simulation_id,
-            'name': sim.name,
-            'epg': epg,
-            'model': sim.model,
+            'mid': map_id,
+            'name': Mapa.name,
+            'search': search,
+            'description': Mapa.description,
             'form': self.form
             }
 
-        return self.render_template('sim_view.html',**params)
+        return self.render_template('map_view.html',**params)
 
-    def post(self,simulation_id):
+    def post(self, map_id):
         """
         Handle updates of the simulation record
         """
 #        if not self.form.validate():
-#            return self.get(simulation_id)
+#            return self.get(map_id)
         user_info = models.User.get_by_id(long(self.user_id))
-        sim  = models.Simulation.get_by_id(int(simulation_id))
+        Mapa  = models.Map.get_by_id(int(map_id))
 
         try:
-            map = self.request.POST.multi['map'].file.read()
+            search = self.request.POST.multi['search_term'].file.read()
         except AttributeError:
-            map = False
-        try:
-            series = self.request.POST.multi['series'].file.read()
-        except AttributeError:
-            series = False
-        try:
-            epg = self.request.POST.multi['epg'].file.read()
-        except AttributeError:
-            epg = False
-        try:
-            network = self.request.POST.multi['network'].file.read()
-        except AttributeError:
-            network = False
-        try:
-            spread = self.request.POST.multi['spread'].file.read()
-        except AttributeError:
-            spread = False
+            search = False
 
 #        sim.owner = user_info.key
         if self.form.name.data:
-            sim.name = self.form.name.data
+            Mapa.name = self.form.name.data
         if self.form.description.data:
-            sim.description = self.form.description.data
+            Mapa.description = self.form.description.data
         #        sim.put()
-        if map:
-            sim.map = map
-        if epg:
-            sim.epg = epg
-        #        sim.put()
-        if series:
-            sim.series = series
-        if network:
-            sim.network = network
-        if spread:
-            sim.spread = spread
-        if self.form.model.data:
-            sim.model = self.form.model.data
-        sim.put()
+        if search:
+            Mapa.search_term = search
+        Mapa.put()
 
-        self.redirect_to('sim-view',simulation_id=simulation_id)
+        self.redirect_to('map-view', map_id=map_id)
 
     @webapp2.cached_property
     def form(self):
-        return forms.SimulationForm(self)
+        return forms.MapForm(self)
 
-class SimulationDelete(BaseHandler):
+
+class MapDelete(BaseHandler):
     """
-    handles the deletion of simulations
+    handles the deletion of mapsS
     """
-    def get(self,simulation_id):
+    def get(self, map_id):
         user_info = models.User.get_by_id(long(self.user_id))
-        sim = models.Simulation.get_by_id(int(simulation_id))
+        sim = models.Map.get_by_id(int(map_id))
         if sim.owner == user_info.key:
             sim.key.delete()
-        self.redirect_to('simulations')
+        self.redirect_to('maps')
 
 class SimulationMapHandler(BaseHandler):
     """
@@ -1189,30 +1164,30 @@ class SimulationSpreadHandler(BaseHandler):
 
         return self.render_template('sim_spread.html',**params)
 
-class SimulationSeriesHandler(BaseHandler):
-    def get(self,simulation_id):
-        sim = memcache.get('simulation_%s'%simulation_id)
-        if sim is None:
-            sim = models.Simulation.get_by_id(int(simulation_id))
-            memcache.add('simulation_%s'%simulation_id, sim,60)
-        series = json.loads(sim.series,object_hook=convert)
-        labels = ['x'] + series.keys() #localities
+class MapDataHandler(BaseHandler):
+    def get(self, map_id):
+        Mapa = memcache.get('map_%s'%map_id)
+        if Mapa is None:
+            Mapa = models.Model.get_by_id(int(map_id))
+            memcache.add('map_%s'%map_id, Mapa,60)
+        data = json.loads(Mapa.map,object_hook=convert)
+        labels = ['x'] + data.keys() #localities
 #        labels = [str(s) for s in labels] #removing unicode objects
-        vars = series.values()[0].keys() #variables
+        vars = data.values()[0].keys() #variables
 #        vars = [str(v) for v in vars]
-        n = len(series[labels[1]][vars[0]])
-        data = {}
+        n = len(data[labels[1]][vars[0]])
+        dataex = {}
         for v in vars:
-            arr = [range(n)] + [series[l][v] for l in labels[1:]]
-            data[v] = [list(t) for t in zip(*arr)]
+            arr = [range(n)] + [data[l][v] for l in labels[1:]]
+            dataex[v] = [list(t) for t in zip(*arr)]
 #            print data[v]
         params = {
-            'name':sim.name,
-            'id': simulation_id,
+            'name': Mapa.name,
+            'id': map_id,
             'localities': labels,
             'variables': vars,
-            'data': data,
-            'nplots':len(vars),
+            'data': dataex,
+            'nplots': len(vars),
             }
         return self.render_template('sim_series.html',**params)
 
