@@ -112,19 +112,19 @@ msgid "Explore nossos dados."
 msgstr ""
 
 msgid "Explore our Data"
-msgstr ""
+msgstr "Explore nossos dados"
 
 msgid "Forgot your password?"
-msgstr ""
+msgstr "Esqueceu sua senha?"
 
 msgid "Good Password"
-msgstr ""
+msgstr "Boa senha"
 
 msgid "Help"
-msgstr ""
+msgstr "Ajuda"
 
 msgid "Insecure Password"
-msgstr ""
+msgstr "Senha insegura"
 
 msgid "Inspect time series of the simulation"
 msgstr ""
@@ -239,7 +239,7 @@ msgid "Short Password"
 msgstr ""
 
 msgid "Sign Up"
-msgstr ""
+msgstr "Cadastre-se"
 
 msgid "Simulation Details"
 msgstr ""
