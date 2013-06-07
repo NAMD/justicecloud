@@ -1,10 +1,15 @@
 #coding:utf8
+"""
+This is the Justice Cloud's default configuration file.
+Changes and additions to settings should be done in the config module
+located in the application root rather than this config.
+"""
 config = {
 
-# environment this app is running on: localhost, testing, production
-'environment': "localhost",
+'environment': "production",
+
 # webapp2 sessions
-'webapp2_extras.sessions' : {'secret_key': '_PUT_KEY_HERE_YOUR_SECRET_KEY_'},
+'webapp2_extras.sessions' : {'secret_key': '_minha_chave_secreta_'},
 
 # webapp2 authentication
 'webapp2_extras.auth' : {'user_model': 'justice.models.User',
@@ -39,15 +44,16 @@ config = {
 
 # get your own consumer key and consumer secret by registering at https://dev.twitter.com/apps
 # callback url must be: http://[YOUR DOMAIN]/login/twitter/complete
-'twitter_consumer_key' : 'PUT_YOUR_TWITTER_CONSUMER_KEY_HERE',
-'twitter_consumer_secret' : 'PUT_YOUR_TWITTER_CONSUMER_SECRET_HERE',
+'twitter_consumer_key' : 'g2aMdO48iEqznTlWlB0hA',
+'twitter_consumer_secret' : 'bCSIAOUKxK0wnJAa0NDIVsntHmz0JoJsh0bwCvAdbs',
+
 
 #Facebook Login
 # get your own consumer key and consumer secret by registering at https://developers.facebook.com/apps
 #Very Important: set the site_url= your domain in the application settings in the facebook app settings page
 # callback url must be: http://[YOUR DOMAIN]/login/facebook/complete
-'fb_api_key' : 'PUT_YOUR_FACEBOOK_PUBLIC_KEY_HERE',
-'fb_secret' : 'PUT_YOUR_FACEBOOK_PUBLIC_KEY_HERE',
+'fb_api_key' : '113701135462760',
+'fb_secret' : 'f5766bcf9a571018f13fedcc60b4cefb',
 
 #Linkedin Login
 #Get you own api key and secret from https://www.linkedin.com/secure/developer
@@ -62,11 +68,11 @@ config = {
 'github_client_secret' : 'PUT_YOUR_GITHUB_CLIENT_SECRET_HERE',
 
 # get your own recaptcha keys by registering at http://www.google.com/recaptcha/
-'captcha_public_key' : "PUT_YOUR_RECAPCHA_PUBLIC_KEY_HERE",
-'captcha_private_key' : "PUT_YOUR_RECAPCHA_PRIVATE_KEY_HERE",
+'captcha_public_key' : "6Lfn49kSAAAAAG118Q6321HE8lJPRECgpw9rs9iX",
+'captcha_private_key' : "6Lfn49kSAAAAAP1ViQ8RpJC_phjgqFSgQGql0w2O",
 
 # Leave blank "google_analytics_domain" if you only want Analytics code
-'google_analytics_domain' : "YOUR_PRIMARY_DOMAIN (e.g. google.com)",
+'google_analytics_domain' : "epigrass.net",
 'google_analytics_code' : "UA-XXXXX-X",
 
 # add status codes and templates used to catch and display errors
@@ -76,7 +82,7 @@ config = {
     403: 'errors/default_error.html',
     404: 'errors/default_error.html',
     500: 'errors/default_error.html',
-    },
+},
 
 # Enable Federated login (OpenID and OAuth)
 # Google App Engine Settings must be set to Authentication Options: Federated Login
@@ -91,8 +97,8 @@ config = {
 # fellas' list
 'developers' : (
     ('Flávio Coelho', 'fccoelho@gmail.com'),
-    ),
+),
 
 # ----> ADD MORE CONFIGURATION OPTIONS HERE <----
 
-}
+} # end config

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import webapp2
-from epigrass import models
-from epigrass import forms
-from epigrass.handlers import BaseHandler
+from justice import models
+from justice import forms
+from justice.handlers import BaseHandler
 from google.appengine.datastore.datastore_query import Cursor
 from google.appengine.ext import ndb
 from google.appengine.api import users

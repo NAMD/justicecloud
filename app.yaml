@@ -55,17 +55,17 @@ handlers:
   static_files: static/\1
   upload: static/(robots\.txt|humans\.txt|crossdomain\.xml)
 
-- url: /epigrass/css
+- url: /justice/css
   mime_type: text/css
-  static_dir: epigrass/static/css
+  static_dir: justice/static/css
 
-- url: /epigrass/js
+- url: /justice/js
   mime_type: text/javascript
-  static_dir: epigrass/static/js
+  static_dir: justice/static/js
 
-- url: /epigrass/img/(.*\.(gif|png|jpg))
-  static_files: epigrass/static/img/\1
-  upload: epigrass/static/img/(.*\.(gif|png|jpg))
+- url: /justice/img/(.*\.(gif|png|jpg))
+  static_files: justice/static/img/\1
+  upload: justice/static/img/(.*\.(gif|png|jpg))
 
 - url: /css
   mime_type: text/css
@@ -96,10 +96,10 @@ libraries:
 error_handlers:
   # Only errors with error_code, don't put a default error here
   - error_code: over_quota
-    file: epigrass/templates/errors/over_quota.html
+    file: justice/templates/errors/over_quota.html
 
   - error_code: dos_api_denial
-    file: epigrass/templates/errors/dos_api_denial.html
+    file: justice/templates/errors/dos_api_denial.html
 
   - error_code: timeout
-    file: epigrass/templates/errors/timeout.html
+    file: justice/templates/errors/timeout.html

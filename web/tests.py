@@ -20,16 +20,16 @@ from google.appengine.ext import testbed
 from mock import Mock
 from mock import patch
 
-import epigrass
-from epigrass import models
-from epigrass import config as boilerplate_config
+import justice
+from justice import models
+from justice import config as boilerplate_config
 import config
-from epigrass import routes
-from epigrass import routes as boilerplate_routes
-from epigrass.lib import utils
-from epigrass.lib import captcha
-from epigrass.lib import i18n
-from epigrass.lib import test_helpers
+from justice import routes
+from justice import routes as boilerplate_routes
+from justice.lib import utils
+from justice.lib import captcha
+from justice.lib import i18n
+from justice.lib import test_helpers
 
 # setting HTTP_HOST in extra_environ parameter for TestApp is not enough for taskqueue stub
 os.environ['HTTP_HOST'] = 'localhost'
@@ -54,7 +54,7 @@ class AppTest(unittest.TestCase, test_helpers.HandlerHelpers):
         self.testapp = webtest.TestApp(self.app, extra_environ={'REMOTE_ADDR' : '127.0.0.1'})
         
         # use absolute path for templates
-        self.app.config['webapp2_extras.jinja2']['template_path'] =  [os.path.join(os.path.dirname(epigrass.__file__), '../templates'), os.path.join(os.path.dirname(epigrass.__file__), 'templates')]
+        self.app.config['webapp2_extras.jinja2']['template_path'] =  [os.path.join(os.path.dirname(justice.__file__), '../templates'), os.path.join(os.path.dirname(justice.__file__), 'templates')]
 
         # activate GAE stubs
         self.testbed = testbed.Testbed()

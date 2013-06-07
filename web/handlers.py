@@ -9,9 +9,9 @@
     Routes are setup in routes.py and added in main.py
 """
 import httpagentparser
-from epigrass import models
-from epigrass.lib.basehandler import BaseHandler
-from epigrass.lib.basehandler import user_required
+from justice import models
+from justice.lib.basehandler import BaseHandler
+from justice.lib.basehandler import user_required
 
 
 class SecureRequestHandler(BaseHandler):
