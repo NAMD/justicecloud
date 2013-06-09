@@ -14,58 +14,63 @@
     </p>
     <div class="navbar">
         <div class="navbar-inner">
-            <a class="brand" href="{{ uri_for("map-view",map_id=mid) }}">{%trans%}Simulation Details{%endtrans%}</a>
+            <a class="brand" href="{{ uri_for("map-view",map_id=mid) }}">{%trans%}Map Details{%endtrans%}</a>
             <ul class="nav">
-                <li {% if path == uri_for("map-data",map_id=mid) %}class="active" {% endif %}><a href="{{ uri_for("map-data",map_id=mid) }}">{%trans%}Series{%endtrans%}</a></li>
+                <li {% if path == uri_for("map-data",map_id=mid) %}class="active" {% endif %}><a href="{{ uri_for("map-data",map_id=mid) }}">{%trans%}Map Data{%endtrans%}</a></li>
 
             </ul>
         </div>
     </div>
-    <div class="well-large">
-        <ul class="nav nav-tabs">
-            <li><a href="#Record" data-toggle="tab">{% trans %}Record{% endtrans %}</a></li>
-            <li><a href="#EPG" data-toggle="tab">{% trans %}EPG file{% endtrans %}</a></li>
-            <li><a href="#Model" data-toggle="tab">{% trans %}Model{% endtrans %}</a></li>
-            <li><a href="#Statistics" data-toggle="tab">{% trans %}Statistics{% endtrans %}</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="Record">
-                <form method="POST" action="{{ url|safe }}" enctype="multipart/form-data" class="well form-horizontal">
-                    <fieldset>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-                        <div>{{ form.name.label }}: {{ form.name(class="input-xlarge focused required") }}</div>
-                        {% if form.name.errors %}
-                            <ul class="errors">{% for error in form.name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                        {% endif %}
+    <div class="row">
+        <div class="span4">
 
-                        <div>{{ form.description.label }}: {{ form.description(class="input-xlarge focused required") }}</div>
-                        {% if form.description.errors %}
-                            <ul class="errors">{% for error in form.description.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                        {% endif %}
-                        <div>{{ form.search_term.label }}: {{ form.search_term(class="input-xlarge focused") }}</div>
-                        {% if form.search_term.errors %}
-                            <ul class="errors">{% for error in form.search_term.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                        {% endif %}
+            <div class="well-large">
+                <ul class="nav nav-tabs">
+                    <li><a href="#Statistics" data-toggle="tab">{% trans %}Statistics{% endtrans %}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="Record">
+                        <form method="POST" action="{{ url|safe }}" enctype="multipart/form-data" class="well form-horizontal">
+                            <fieldset>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                                <div>{{ form.name.label }}: {{ form.name(class="input-xlarge focused required") }}</div>
+                                {% if form.name.errors %}
+                                    <ul class="errors">{% for error in form.name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                                {% endif %}
 
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">{% trans %}Update!{% endtrans %}</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div class="tab-pane" id="EPG">
-                <code>
-                {% for l in epg %}
-                    <p>{{ l }}</p>
-                {% endfor %}
-                </code>
-            </div>
-            <div class="tab-pane" id="Model">
-                {{ model }}
-            </div>
-            <div class="tab-pane" id="Statistics">
+                                <div>{{ form.description.label }}: {{ form.description(class="input-xlarge focused required") }}</div>
+                                {% if form.description.errors %}
+                                    <ul class="errors">{% for error in form.description.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                                {% endif %}
+                                <div>{{ form.search_term.label }}: {{ form.search_term(class="input-xlarge focused") }}</div>
+                                {% if form.search_term.errors %}
+                                    <ul class="errors">{% for error in form.search_term.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                                {% endif %}
 
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">{% trans %}Update!{% endtrans %}</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="EPG">
+                        <code>
+                        {% for l in epg %}
+                            <p>{{ l }}</p>
+                        {% endfor %}
+                        </code>
+                    </div>
+                    <div class="tab-pane" id="Model">
+                        {{ model }}
+                    </div>
+                    <div class="tab-pane" id="Statistics">
+
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="span8">
+
         </div>
     </div>
 {% endblock %}
