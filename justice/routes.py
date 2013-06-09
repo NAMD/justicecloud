@@ -25,7 +25,6 @@ _routes = [
     RedirectRoute('/maps/delete/<map_id>/', handlers.MapDelete, name='map-del', strict_slash=True),
     RedirectRoute('/maps/view/<map_id>/', handlers.MapHandler, name='map-view', strict_slash=True),
     RedirectRoute('/maps/view/<map_id>/data/', handlers.MapDataHandler, name='map-data', strict_slash=True),
-    RedirectRoute('/simulations/upload/', handlers.UploadHandler, name='carga', strict_slash=True),
     RedirectRoute('/settings/profile', handlers.EditProfileHandler, name='edit-profile', strict_slash=True),
     RedirectRoute('/settings/password', handlers.EditPasswordHandler, name='edit-password', strict_slash=True),
     RedirectRoute('/settings/email', handlers.EditEmailHandler, name='edit-email', strict_slash=True),

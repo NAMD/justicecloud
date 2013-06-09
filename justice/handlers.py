@@ -1228,51 +1228,6 @@ class SimulationSpreadHandler(BaseHandler):
 
         return self.render_template('sim_spread.html',**params)
 
-class UploadHandler(BaseHandler):
-    """
-    Hander for simulation uploading
-    """
-    @user_required
-    def get(self):
-#        if self.user:
-#            pass
-        params = {
-            'form': self.form
-        }
-        return self.render_template('upload.html', **params)
-
-    def post(self):
-        if not self.form.validate():
-            return self.get()
-        map = self.request.POST.multi['map'].file.read()
-        series = self.request.POST.multi['series'].file.read()
-        epg = self.request.POST.multi['epg'].file.read()
-        network = self.request.POST.multi['network'].file.read()
-        spread = self.request.POST.multi['spread'].file.read()
-
-
-        user_info = models.User.get_by_id(long(self.user_id))
-        sim  = models.Simulation()
-        sim.owner = user_info.key
-        sim.name = self.form.name.data
-        sim.description = self.form.description.data
-#        sim.put()
-        sim.map = map
-#        sim.put()
-        sim.epg = epg
-#        sim.put()
-        sim.series = series
-#        sim.put()
-        sim.network = network
-        sim.spread = spread
-        sim.model = self.form.model.data
-        sim.put()
-
-        self.redirect_to('simulations')
-
-    @webapp2.cached_property
-    def form(self):
-        return forms.SimulationForm(self)
 
 
 class EditProfileHandler(BaseHandler):
