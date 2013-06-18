@@ -34,6 +34,7 @@ from lib import utils, captcha, twitter
 from lib.basehandler import BaseHandler
 from lib.basehandler import user_required
 from lib import facebook
+from data import load_from_fs
 
 def convert(input):
     """
@@ -1053,7 +1054,9 @@ class MapHandler(BaseHandler):
         """
         user_info = models.User.get_by_id(long(self.user_id))
         if map_id == "new":  # Create a new Simulation entry
+            data = load_from_fs("/home/fccoelho/Documentos/Projects_software/LilJSON/geo_notas_data_c.json")
             Mapa = models.Map(name=_("New Map"))
+            Mapa.map = data
             Mapa.creator = user_info.key
             Mapa.search_term = ""
             Mapa.put()
@@ -1079,10 +1082,11 @@ class MapHandler(BaseHandler):
             'name': Mapa.name,
             'search': search,
             'description': Mapa.description,
-            'form': self.form
+            'form': self.form,
+            'points': Mapa.map,
             }
 
-        return self.render_template('map_view.html',**params)
+        return self.render_template('map_view.html', **params)
 
     def post(self, map_id):
         """
@@ -1091,7 +1095,7 @@ class MapHandler(BaseHandler):
 #        if not self.form.validate():
 #            return self.get(map_id)
         user_info = models.User.get_by_id(long(self.user_id))
-        Mapa  = models.Map.get_by_id(int(map_id))
+        Mapa = models.Map.get_by_id(int(map_id))
 
         try:
             search = self.request.POST.multi['search_term'].file.read()
@@ -1117,13 +1121,13 @@ class MapHandler(BaseHandler):
 
 class MapDelete(BaseHandler):
     """
-    handles the deletion of mapsS
+    handles the deletion of maps
     """
     def get(self, map_id):
         user_info = models.User.get_by_id(long(self.user_id))
-        sim = models.Map.get_by_id(int(map_id))
-        if sim.owner == user_info.key:
-            sim.key.delete()
+        Mapa = models.Map.get_by_id(int(map_id))
+        if Mapa.creator == user_info.key:
+            Mapa.key.delete()
         self.redirect_to('maps')
 
 class SimulationMapHandler(BaseHandler):
@@ -1145,24 +1149,7 @@ class SimulationMapHandler(BaseHandler):
 
         return self.render_template('sim_map_ll.html',**params)
 
-class SimulationSpreadHandler(BaseHandler):
-    """
-    Returns Spread tree view of a simulation object
-    """
-    def get(self,simulation_id):
-        s = memcache.get('simulation_%s'%simulation_id)
-        if s is None:
-            s = models.Simulation.get_by_id(int(simulation_id))
-            memcache.add('simulation_%s'%simulation_id, s,60)
-        #        print s.map
-        params = {
-            #            'simulation': s,
-            'map':  s.map,
-            'sid':  simulation_id,
-            'name': s.name,
-            }
 
-        return self.render_template('sim_spread.html',**params)
 
 class MapDataHandler(BaseHandler):
     def get(self, map_id):
@@ -1189,44 +1176,7 @@ class MapDataHandler(BaseHandler):
             'data': dataex,
             'nplots': len(vars),
             }
-        return self.render_template('sim_series.html',**params)
-
-class SimulationNetHandler(BaseHandler):
-    def get(self,simulation_id):
-        sim = memcache.get('simulation_%s'%simulation_id)
-        if sim is None:
-            sim = models.Simulation.get_by_id(int(simulation_id))
-            memcache.add('simulation_%s'%simulation_id, sim,60)
-        network = json.loads(sim.network, object_hook=convert)
-
-        data = {}
-
-        params = {
-            'name':sim.name,
-            'id': simulation_id,
-            'network':json.dumps(network),
-
-            }
-        return self.render_template('sim_network.html',**params)
-
-class SimulationSpreadHandler(BaseHandler):
-    """
-    Returns Spread tree view of a simulation object
-    """
-    def get(self,simulation_id):
-        s = memcache.get('simulation_%s'%simulation_id)
-        if s is None:
-            s = models.Simulation.get_by_id(int(simulation_id))
-            memcache.add('simulation_%s'%simulation_id, s,60)
-            #        print s.map
-        params = {
-            #            'simulation': s,
-            'spread':  s.spread,
-            'sid':  simulation_id,
-            'name': s.name,
-            }
-
-        return self.render_template('sim_spread.html',**params)
+        return self.render_template('sim_series.html', **params)
 
 
 

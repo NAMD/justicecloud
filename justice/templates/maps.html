@@ -41,7 +41,9 @@
             $.ajax({
                 url: '/maps/delete/'+id,
                 type: 'GET',
-                success: function (result){}
+                success: function (result){
+                    window.location.reload(true);
+                }
             });
         }
     </script>
