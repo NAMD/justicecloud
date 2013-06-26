@@ -34,7 +34,7 @@ from lib import utils, captcha, twitter
 from lib.basehandler import BaseHandler
 from lib.basehandler import user_required
 from lib import facebook
-from data import load_from_fs
+from data import sample_geojson
 
 def convert(input):
     """
@@ -1054,7 +1054,7 @@ class MapHandler(BaseHandler):
         """
         user_info = models.User.get_by_id(long(self.user_id))
         if map_id == "new":  # Create a new Simulation entry
-            data = load_from_fs("/home/fccoelho/Documentos/Projects_software/LilJSON/geo_notas_data_c.json")
+            data = sample_geojson
             Mapa = models.Map(name=_("New Map"))
             Mapa.map = data
             Mapa.creator = user_info.key
