@@ -1054,7 +1054,7 @@ class MapHandler(BaseHandler):
         """
         user_info = models.User.get_by_id(long(self.user_id))
         if map_id == "new":  # Create a new Simulation entry
-            data = sample_geojson
+            data = ""  # sample_geojson
             Mapa = models.Map(name=_("New Map"))
             Mapa.map = data
             Mapa.creator = user_info.key

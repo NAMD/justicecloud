@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-06-07 11:33-0300\n"
+"POT-Creation-Date: 2013-07-01 08:54-0300\n"
 "PO-Revision-Date: 2013-06-07 11:31-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt_BR <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 "X-Language: pt_BR\n"
-"X-Source-Language: en\n"
+"X-Source-Language: en_US\n"
 
 msgid ""
 "\n"
@@ -26,27 +26,33 @@ msgid ""
 "nodes on the left. Hover your with the mouse to see more details.\n"
 "    "
 msgstr ""
+"Neste diagrama Sankey, nós à direita enviaram casos infecciosos aos nós da "
+"esquerda. Passe o mouse sobre os nós e as conexões para ver mais detalhes."
 
 msgid " Justića nas Nuvens"
-msgstr ""
+msgstr "Justiça nas Nuvens"
 
 msgid "'Time Series',"
-msgstr ""
+msgstr "'Séries Temporais'"
 
 msgid "'time'"
-msgstr ""
+msgstr "'tempo'"
 
 msgid ""
 "<a href=\"http://browsehappy.com/\">Upgrade to a different browser</a>\n"
 "    \tor <a href=\"http://www.google.com/chromeframe/?redirect=true\">\n"
 "    \tinstall Google Chrome Frame</a> to experience this site."
 msgstr ""
+"<a href=\"http://browsehappy.com/\">Faça upgrade para um navegador "
+"melhor</a>\n"
+"    \tou <a href=\"http://www.google.com/chromeframe/?redirect=true\">\n"
+"    \tinstale o Google Chrome Frame</a> para usar este site."
 
 msgid "Associate account with"
-msgstr ""
+msgstr "Associar conta com"
 
 msgid "Big Picture"
-msgstr ""
+msgstr "Visão geral"
 
 msgid "Browse Maps"
 msgstr "Explore os Mapas"
@@ -85,31 +91,31 @@ msgid "Description"
 msgstr "Descricão"
 
 msgid "Detail view"
-msgstr ""
+msgstr "Visão detalhada"
 
 msgid "Don't have an account?"
-msgstr ""
+msgstr "Não tem uma conta?"
 
 msgid "EPG file"
-msgstr ""
+msgstr "Arquivo EPG"
 
 msgid "Edit Profile"
-msgstr ""
+msgstr "Editar Perfil"
 
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 msgid "Enter a new email address"
-msgstr ""
+msgstr "Entre um novo endereço de email"
 
 msgid "Enter your"
-msgstr ""
+msgstr "Entre o seu"
 
 msgid "Existing social association"
-msgstr ""
+msgstr "cadastro social existente"
 
 msgid "Explore nossos dados."
-msgstr ""
+msgstr "Explore nossos dados"
 
 msgid "Explore our Data"
 msgstr "Explore nossos dados"
@@ -127,11 +133,10 @@ msgid "Insecure Password"
 msgstr "Senha insegura"
 
 msgid "Inspect time series of the simulation"
-msgstr ""
+msgstr "Inspecionar a série temporal da simulação"
 
-#, fuzzy
 msgid "Justice Cloud"
-msgstr "Justića nas Nuvens"
+msgstr "Justiça nas Nuvens"
 
 msgid "Justice Cloud is released under the"
 msgstr "Justića nas nuvens está licenciado sob a"
@@ -140,157 +145,157 @@ msgid "Justice from a cloud view prespective."
 msgstr "A Justića sob uma perpectiva mais elevada"
 
 msgid "Justića na Nuvens."
-msgstr ""
+msgstr "Justiça nas Nuvens"
 
 msgid "Language"
-msgstr ""
+msgstr "Língua"
 
 msgid "Last Name"
-msgstr ""
+msgstr "Sobrenome"
 
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 msgid "Logout"
-msgstr ""
+msgstr "Logout"
 
 msgid "Manage"
-msgstr ""
+msgstr "Gerenciar"
 
 msgid "Map"
-msgstr ""
+msgstr "Mapa"
 
 msgid "Map Library"
-msgstr ""
+msgstr "Biblioteca de Mapas"
 
 msgid "Map View"
-msgstr ""
+msgstr "Visualização do Mapa"
 
 msgid "Map Visualizations"
-msgstr ""
+msgstr "Visualizações de mapa"
 
 msgid "Message"
-msgstr ""
+msgstr "Mensagem"
 
 msgid "Model"
-msgstr ""
+msgstr "Modelo"
 
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 msgid "Navigate the results using the bar below"
-msgstr ""
+msgstr "Navegar os resultados usando a barra abaixo"
 
 msgid "Navigate the simulation results on the map."
-msgstr ""
+msgstr "Navegar os resultados da simulação no mapa"
 
 msgid "Navigate using the bar below"
-msgstr ""
+msgstr "Navegue usando a barra abaixo"
 
 msgid "Network"
-msgstr ""
+msgstr "Rede"
 
 msgid "New Email"
-msgstr ""
+msgstr "Novo Email"
 
 msgid "New Password"
-msgstr ""
+msgstr "Nova Senha"
 
 msgid "Or Sign in using:"
-msgstr ""
+msgstr "Ou entre usando:"
 
 msgid "Password"
-msgstr ""
+msgstr "Senha"
 
 msgid "Record"
-msgstr ""
+msgstr "Registro"
 
 msgid "Remember me?"
-msgstr ""
+msgstr "Lambrar de mim?"
 
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
 msgid "Reset password"
-msgstr ""
+msgstr "Redefinir a senha"
 
 msgid "Results"
-msgstr ""
+msgstr "Resultados"
 
 msgid "Search User"
-msgstr ""
+msgstr "Buscar Usuário"
 
 msgid "Secure Page"
-msgstr ""
+msgstr "Página segura"
 
 msgid "Secure Password"
-msgstr ""
+msgstr "Senha Segura"
 
 msgid "Send Message"
-msgstr ""
+msgstr "Enviar Mensagem"
 
 msgid "Series"
-msgstr ""
+msgstr "Série"
 
 msgid "Series view"
-msgstr ""
+msgstr "Visão da Série"
 
 msgid "Short Password"
-msgstr ""
+msgstr "Senha curta"
 
 msgid "Sign Up"
 msgstr "Cadastre-se"
 
 msgid "Simulation Details"
-msgstr ""
+msgstr "Detalhes da Simulação"
 
 msgid "Simulations View"
-msgstr ""
+msgstr "Visão da Simulação"
 
 msgid "Spread Tree"
-msgstr ""
+msgstr "Ávore de Espalhamento"
 
 msgid "Statistics"
-msgstr ""
+msgstr "Estatísticas"
 
 msgid "These are visualizations created by our users."
-msgstr ""
+msgstr "Estas são visualizações criadas por nossos usuários."
 
 msgid "Um novo ponto de vista sobre a justića no Brasil"
-msgstr ""
+msgstr "Um novo ponto de vista sobre a justiça no Brasil"
 
 msgid "Update Profile"
-msgstr ""
+msgstr "Atualizar Perfil"
 
 msgid "Update!"
-msgstr ""
+msgstr "Atualizar!"
 
 msgid "Upload a Simulation"
-msgstr ""
+msgstr "Enviar uma Simulação"
 
 msgid "Upload an Epigrass Simulation"
-msgstr ""
+msgstr "Enviar um Simulação do Epigrass"
 
 msgid "Upload!"
-msgstr ""
+msgstr "Enviar!"
 
 msgid "User Details"
-msgstr ""
+msgstr "Detalhes do Usuário"
 
 msgid "Username"
-msgstr ""
+msgstr "Usuário"
 
 msgid "Username or Email"
-msgstr ""
+msgstr "Usuário ou Email"
 
 msgid "Veja os nosso dados"
-msgstr ""
+msgstr "Veja os nosso dados"
 
 msgid "View the specifications of the simulation."
-msgstr ""
+msgstr "Ver as especificações da simulação."
 
 msgid "Your browser is <em>ancient!</em>"
-msgstr ""
+msgstr "Seu navegador é <em>antigo!</em>"
 
 msgid "created on"
-msgstr ""
+msgstr "criado em"
